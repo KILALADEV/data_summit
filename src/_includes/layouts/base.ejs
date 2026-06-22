@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
+    <title>
+        <%= typeof title !=='undefined' ? title : site.title %>
+    </title>
+    <meta name="title" content="<%= typeof title !== 'undefined' ? title : site.title %>">
+    <meta name="description" content="<%= typeof description !== 'undefined' ? description : site.description %>">
+    <meta name="keywords" content="<%= typeof keywords !== 'undefined' ? keywords : site.keywords %>">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : site.ogType %>">
+    <meta property="og:url" content="<%= typeof url !== 'undefined' ? url : site.url %>">
+    <meta property="og:title" content="<%= typeof title !== 'undefined' ? title : site.title %>">
+    <meta property="og:description"
+        content="<%= typeof description !== 'undefined' ? description : site.description %>">
+    <meta property="og:image" content="<%= typeof ogImage !== 'undefined' ? ogImage : site.ogImage %>">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="<%= typeof twitterCard !== 'undefined' ? twitterCard : site.twitterCard %>">
+    <meta name="twitter:site" content="" />
+    <meta property="twitter:url" content="<%= typeof twitterUrl !== 'undefined' ? twitterUrl : site.twitterUrl %>">
+    <meta property="twitter:title" content="<%= typeof title !== 'undefined' ? title : site.title %>">
+    <meta property="twitter:description"
+        content="<%= typeof description !== 'undefined' ? description : site.description %>">
+    <meta property="twitter:image"
+        content="<%= typeof twitterImage !== 'undefined' ? twitterImage : site.twitterImage %>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="/assets/css/style.scss" rel="stylesheet">
+    <% if (typeof css !=='undefined' || site.css) { %>
+        <link href="<%= typeof css !== 'undefined' ? css : site.css %>" rel="stylesheet">
+    <% } %>
+    <script type="module" src="/assets/js/common.js"></script>
+</head>
+
+<body id="top">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHFXXP6BT3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BHFXXP6BT3');
+</script>
+
+
+  <%- include('../parts/header') %>
+  <main class="l-main" id="main">
+      <div class="l-main__inner">
+          <%- content %>
+      </div>
+  </main>
+  <%- include('../parts/footer') %>
+</body>
+</html>

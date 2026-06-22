@@ -1,0 +1,16 @@
+@use "../mixin";
+@use "../var";
+
+%container {
+  max-width: var(--content-width);
+  padding-inline: var(--content-gutter-narrow);
+  margin-inline: auto;
+}
+
+%content {
+  max-width: var(--content-width-narrow);
+  padding-inline: var(--content-gutter-narrow);
+  margin-inline: auto;
+
+  @include mixin.reset-child-margin;
+}

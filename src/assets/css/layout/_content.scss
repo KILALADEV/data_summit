@@ -1,0 +1,9 @@
+@use "../global" as *;
+
+.l-container {
+  @extend %container;
+}
+
+.l-content {
+  @extend %content;
+}

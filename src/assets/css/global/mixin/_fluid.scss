@@ -1,0 +1,51 @@
+@use "../var";
+@use "./media-query";
+@use "../function/index" as *;
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+
+@mixin fluid($property, $sp, $pc: $sp) {
+  $sp-vw: math.div(100, var.$reference-viewport-sp) * $sp * 1vw;
+  $pc-vw: math.div(100, var.$reference-viewport-pc) * $pc * 1vw;
+
+  #{$property}: px2rem($sp);
+
+  @include media-query.mq {
+    #{$property}: px2rem($pc);
+  }
+
+  @include media-query.mq(above, 1920px) {
+    #{$property}: $pc-vw;
+  }
+}
+
+@mixin fluid-vw($property, $sp, $pc: $sp) {
+  $sp-vw: math.div(100, var.$reference-viewport-sp) * $sp * 1vw;
+  $pc-vw: math.div(100, var.$reference-viewport-pc) * $pc * 1vw;
+
+  #{$property}: $sp-vw;
+
+  @include media-query.mq {
+    #{$property}: $pc-vw;
+  }
+}
+
+@mixin fluid-range($property, $sp, $pc: $sp) {
+  $sp-vw: math.div(100, var.$reference-viewport-sp) * $sp * 1vw;
+  $pc-vw: math.div(100, var.$reference-viewport-pc) * $pc * 1vw;
+
+  #{$property}: $sp-vw;
+
+  @include media-query.mq(between, null, 375px, 500px) {
+    #{$property}: px2rem($sp);
+  }
+
+  @include media-query.mq {
+    #{$property}: $pc-vw;
+  }
+
+  @include media-query.mq(between, null, 1365px, 1920px) {
+    #{$property}: px2rem($pc);
+  }
+}

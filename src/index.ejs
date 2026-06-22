@@ -1,0 +1,256 @@
+---
+layout: layouts/base
+title: title
+description: description
+keywords:
+url:
+ogType: website
+ogImage: assets/images/OGP.jpg
+twitterUrl:
+twitterCard: summary_large_image
+twitterImage: assets/images/OGP.jpg
+---
+<p class="" style="display: flex;flex-direction: column;padding: 20px 20px 0;">
+  <span>Quy ước đặt tên</span>
+  <span>Thành phần tái sử dụng -> component -> class -> c-ten-component</span>
+  <span>dùng chung cho page -> module -> class -> m-ten-file</span>
+  <span>Top Page -> top-class</span>
+
+</p>
+<section class="style-guide-section" style="max-width: 1920px; padding: 20px 20px;">
+  <%
+    const sectionData = {
+      title: "Button Component Documentation",
+      items: [
+        {
+          name: "1. Primary Button",
+          config: { text: "Button Primary", url: "#primary", className: "c-btn c-btn__primary" },
+          codeSample: `&lt;%- include('./components/button', { props: { text: "Button Primary", url: "#primary", className: "c-btn c-btn__primary" } }) %&gt;`
+        },
+        {
+          name: "2. Secondary Button",
+          config: { text: "Button Secondary", url: "#secondary", className: "c-btn c-btn__secondary" },
+          codeSample: `&lt;%- include('./components/button', { props: { text: "Button Secondary", url: "#secondary", className: "c-btn c-btn__secondary" } }) %&gt;`
+        },
+        {
+          name: "3. Button Blank",
+          config: { text: "Button Blank", url: "#blank", className: "c-btn c-btn__primary", target: "_blank", icon: "icon-blank", iconPosition: "right" },
+          codeSample: `&lt;%- include('./components/button', { props: { text: "Button Blank", url: "#blank", className: "c-btn c-btn__primary", target: "_blank", icon: "icon-blank", iconPosition: "right" } }) %&gt;`
+        },
+        {
+          name: "4. Button Icon",
+          config: { text: "Button Icon", url: "#icon", className: "c-btn c-btn__secondary", icon: "icon-chervon-right", iconPosition: "right" },
+          codeSample: `&lt;%- include('./components/button', { props: { text: "Button Icon", url: "#icon", className: "c-btn c-btn__secondary", icon: "icon-chervon-right", iconPosition: "right" } }) %&gt;`
+        },
+        {
+          name: "5. Button Icon Left",
+          config: { text: "Button Icon", url: "#icon", className: "c-btn c-btn__secondary", icon: "icon-chervon-right", iconPosition: "left" },
+          codeSample: `&lt;%- include('./components/button', { props: { text: "Button Icon", url: "#icon", className: "c-btn c-btn__secondary", icon: "icon-chervon-right", iconPosition: "left" } }) %&gt;`
+        }
+      ],
+    };
+  %>
+
+  <h2 style="margin-bottom: 20px;"><%= sectionData.title %></h2>
+
+  <div class="documentation-box" style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff;">
+
+    <div class="preview-group" style="padding: 30px; background: #f9f9f9; border-bottom: 1px solid #ddd; display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+      <% sectionData.items.forEach(item => { %>
+        <div class="preview-item" style="text-align: center;">
+          <%- include('./components/button', { props: item.config }) %>
+        </div>
+      <% }); %>
+    </div>
+
+    <div class="code-group" style="background: #272822; padding: 20px;">
+      <% sectionData.items.forEach((item, index) => { %>
+        <div class="code-item-row" style="position: relative; margin-bottom: 15px; border-bottom: 1px solid #3e3d32; padding-bottom: 15px;">
+          <div style="color: #6a737d; font-size: 12px; font-weight: bold; margin-bottom: 6px;"><%= item.name %></div>
+
+          <div class="code-copy-wrapper" style="position: relative;">
+            <button class="js-btn-copy" style="position: absolute; top: 8px; right: 10px; padding: 4px 8px; background: #4caf50; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; transition: background 0.2s; z-index: 2;">
+              Copy
+            </button>
+
+            <pre style="margin: 0; background: #1e1e1e; padding: 12px 50px 12px 15px; border-radius: 4px; overflow-x: auto;"><code class="js-copy-code" data-code="<%= item.codeSample %>" style="color: #f8f8f2; font-family: Consolas, Monaco, monospace; font-size: 13px; white-space: pre;">Loading code...</code></pre>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+
+  </div>
+</section>
+
+<section class="style-guide-section" style="max-width: 1920px; padding: 20px 20px; font-family: sans-serif;">
+  <%
+    const sectionDataImage = {
+      title: "Image Component Documentation",
+      items: [
+        {
+          name: "1. Responsive Image",
+          config: {
+            src: "/assets/images/common/1920x800.png",
+            mobileSrc: "/assets/images/common/768x667.png",
+            alt: "Image Demo",
+            className: "custom-tuy-chinh",
+            width: "1920",
+            height: "800"
+          },
+          codeSample: `&lt;%- include('./components/image', { props: { src: "/assets/images/common/1920x800.png", mobileSrc: "/assets/images/common/768x667.png", alt: "Image Demo", className: "custom-tuy-chinh", width: "1920", height: "800" } }) %&gt;`
+        },
+        {
+          name: "2. Square Avatar (Ảnh tỉ lệ 1:1, tải trước ngay lập tức - Eager)",
+          config: {
+            src: "/assets/images/common/1920x800.png",
+            alt: "Image Demo",
+            className: "custom-tuy-chinh",
+            width: "1920",
+            height: "800",
+            loading: "eager"
+          },
+          codeSample: `&lt;%- include('./components/image', { props: { src: "/assets/images/common/1920x800.png", alt: "Image Demo", className: "custom-tuy-chinh", width: "1920", height: "800", loading: "eager" } }) %&gt;`
+        }
+      ],
+    };
+  %>
+
+  <h2 style="margin-bottom: 20px;"><%= sectionDataImage.title %></h2>
+
+  <div class="documentation-box" style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; display: flex; flex-direction: column; gap: 40px; padding: 30px;">
+
+    <% sectionDataImage.items.forEach(item => { %>
+      <div class="component-sample-block" style="border-bottom: 1px dashed #eee; padding-bottom: 30px;">
+
+        <div style="font-size: 15px; font-weight: bold; color: #333; margin-bottom: 12px; border-left: 4px solid #4caf50; padding-left: 10px;">
+          <%= item.name %>
+        </div>
+
+        <div class="preview-box" style="background: #f9f9f9; border-radius: 6px; margin-bottom: 15px;">
+          <%- include('./components/image', { props: item.config }) %>
+        </div>
+
+        <div class="code-item-row">
+          <div class="code-copy-wrapper" style="position: relative;">
+
+            <button class="js-btn-copy" style="position: absolute; top: 8px; right: 10px; padding: 4px 8px; background: #4caf50; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; transition: background 0.2s; z-index: 2;">
+              Copy
+            </button>
+
+            <pre style="margin: 0; background: #272822; padding: 12px 50px 12px 15px; border-radius: 4px; overflow-x: auto;"><code class="js-copy-code" data-code="<%= item.codeSample %>" style="color: #f8f8f2; font-family: Consolas, Monaco, monospace; font-size: 13px; white-space: pre;">Loading code...</code></pre>
+          </div>
+        </div>
+
+      </div>
+    <% }); %>
+
+  </div>
+</section>
+
+<section class="style-guide-section" style="max-width: 1920px; padding: 20px 20px; font-family: sans-serif; margin-top: 60px;">
+  <%
+    const sectionDataCard = {
+      title: "Card Component Documentation",
+      items: [
+        {
+          name: "1. Default Product Card",
+          config: {
+            url: "#cardtop",
+            direction: "top",
+            title: "Card Title",
+            desc: "Card Description",
+            image: { src: "/assets/images/common/600x400.png", width: "600", height: "400" },
+            button: { text: "Card Button", url: "#card", className: "c-btn c-btn__primary" }
+          },
+          codeSample: `&lt;%- include('./components/card', { props: {url: "#cardtop", direction: "top", title: "Card Title", desc: "Card Description", image: { src: "/assets/images/common/600x400.png", width: "600", height: "400" }, button: { text: "Card Button", className: "c-btn c-btn__primary" } } }) %&gt;`
+        },
+        {
+          name: "2. Card Left (Ngang - Ảnh bên trái, chữ bên phải)",
+          config: {
+            direction: "left",
+            title: "Cart title",
+            desc: "Card Description",
+            image: { src: "/assets/images/common/600x400.png", width: "600", height: "400" },
+            button: { text: "Card Button", url: "#cardleft", className: "c-btn c-btn__secondary" }
+          },
+          codeSample: `&lt;%- include('./components/card', { props: { direction: "left", title: "Cart title", desc: "Card Description", image: { src: "/assets/images/common/600x400.png", width: "600", height: "400" }, button: { text: "Card Button", className: "c-btn c-btn__secondary" } } }) %&gt;`
+        },
+        {
+          name: "3. Card Right (Ngang - Ảnh bên phải, chữ bên trái)",
+          config: {
+            direction: "right",
+            title: "Cart title",
+            desc: "Card Description",
+            image: { src: "/assets/images/common/600x400.png", width: "600", height: "400" },
+            button: { text: "Card Button", url: "#cardright", className: "c-btn c-btn__secondary" }
+          },
+          codeSample: `&lt;%- include('./components/card', { props: { direction: "right", title: "Cart title", desc: "Card Description", image: { src: "/assets/images/common/600x400.png", width: "600", height: "400" }, button: { text: "Card Button", className: "c-btn c-btn__secondary" } } }) %&gt;`
+        },
+      ],
+    };
+  %>
+
+  <h2 style="margin-bottom: 20px;"><%= sectionDataCard.title %></h2>
+
+  <div class="documentation-box" style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #fff; display: flex; flex-direction: column; gap: 40px; padding: 30px;">
+
+    <% sectionDataCard.items.forEach(item => { %>
+      <div class="component-sample-block" style="border-bottom: 1px dashed #eee; padding-bottom: 30px;">
+
+        <div style="font-size: 15px; font-weight: bold; color: #333; margin-bottom: 12px; border-left: 4px solid #00bcd4; padding-left: 10px;">
+          <%= item.name %>
+        </div>
+
+        <div class="preview-box" style="max-width: <%= (item.config.direction === 'left' || item.config.direction === 'right') ? '700px' : '380px' %>; border-radius: 6px; margin-bottom: 15px;">
+          <%- include('./components/card', { props: item.config }) %>
+        </div>
+
+        <div class="code-item-row">
+          <div class="code-copy-wrapper" style="position: relative;">
+            <button class="js-btn-copy" style="position: absolute; top: 8px; right: 10px; padding: 4px 8px; background: #4caf50; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; transition: background 0.2s; z-index: 2;">
+              Copy
+            </button>
+            <pre style="margin: 0; background: #272822; padding: 12px 50px 12px 15px; border-radius: 4px; overflow-x: auto;"><code class="js-copy-code" data-code="<%= item.codeSample %>" style="color: #f8f8f2; font-family: Consolas, Monaco, monospace; font-size: 13px; white-space: pre;">Loading code...</code></pre>
+          </div>
+        </div>
+
+      </div>
+    <% }); %>
+
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.js-copy-code').forEach(el => {
+      const rawCode = el.getAttribute('data-code');
+      const parser = new DOMParser();
+      const decodedHtml = parser.parseFromString(rawCode, 'text/html').body.textContent;
+      el.textContent = decodedHtml;
+    });
+
+    document.addEventListener("click", async (e) => {
+      const btnCopy = e.target.closest(".js-btn-copy");
+      if (!btnCopy) return;
+
+      const codeEl = btnCopy.closest(".code-copy")?.querySelector(".js-copy-code");
+      if (!codeEl) return;
+
+      try {
+        await navigator.clipboard.writeText(codeEl.textContent.trim());
+
+        const originalText = btnCopy.textContent;
+        btnCopy.textContent = "Copied!";
+        btnCopy.style.background = "#2196f3";
+
+        setTimeout(() => {
+          btnCopy.textContent = originalText;
+          btnCopy.style.background = "#4caf50";
+        }, 2000);
+      } catch (err) {
+        console.error("Không thể copy mã code: ", err);
+        btnCopy.textContent = "Error!";
+        btnCopy.style.background = "#f44336";
+      }
+    });
+  });
+</script>

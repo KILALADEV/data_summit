@@ -1,0 +1,18 @@
+@use "../global" as *;
+
+@for $i from 0 through 12 {
+  $v: $i * 10;
+
+  .u-mt-#{$v} {
+    margin-top: #{$v}px !important;
+  }
+  .u-mb-#{$v} {
+    margin-bottom: #{$v}px !important;
+  }
+  .u-pt-#{$v} {
+    padding-top: #{$v}px !important;
+  }
+  .u-pb-#{$v} {
+    padding-bottom: #{$v}px !important;
+  }
+}

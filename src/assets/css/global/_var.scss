@@ -1,0 +1,71 @@
+@use "sass:map";
+@use "sass:math";
+
+// ============================================================
+// Breakpoints
+// ============================================================
+
+$breakpoint: (
+  sm: 480px,
+  md: 769px,
+  lg: 960px,
+  xl: 1280px,
+);
+$reference-viewport-sp: 375;
+$reference-viewport-pc: 1366;
+
+// ============================================================
+// Root Variables
+// ============================================================
+
+:root {
+  // Font
+  --font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", sans-serif;
+  --font-family-en: "Barlow Condensed", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", serif;
+
+  // Font size
+  --font-size: 0.875rem;
+
+  // Line height
+  --line-height: 1.5;
+
+  // Letter spacing
+  --letter-spacing: 0.05em;
+
+  // Colors
+  --color-black: #000;
+  --color-red: #E60014;
+  --color-white: #fff;
+  --color-blue: #001EA0;
+  --color-green: #32C81E;
+  --color-gray: #777;
+  --color-light-gray: #dadada;
+  --color-pubple: #8000ff;
+  --color-pink: #ff09ad;
+
+  // Content width
+  --content-width: 1320px;
+  --content-width-medium: 1100px;
+
+  // Gutter
+  --content-gutter: 20px;
+  --content-gutter-wide: 60px;
+
+  // Module gutter
+  --module-gutter: 1.875rem;
+  --module-gutter-wide: 2.5rem;
+
+  // Scroll
+  --scroll-padding: 0;
+  --scroll-padding-tab: 0;
+  --scroll-padding-pc: 0;
+
+  // Transition
+  --transition-duration: 0.4s;
+  --hover-opacity: 0.8;
+  --e-in-out-expo: cubic-bezier(1, 0, 0, 1);
+
+  // Z-index
+  --z-index-header: 10;
+
+}

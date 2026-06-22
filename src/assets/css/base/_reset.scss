@@ -1,0 +1,117 @@
+// sanitize.css
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+
+::before,
+::after {
+  vertical-align: inherit;
+  text-decoration: inherit;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+::-webkit-search-decoration {
+  appearance: none;
+}
+
+::-webkit-file-upload-button {
+  font: inherit;
+  appearance: auto;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+dl,
+dt,
+dd,
+figure,
+figcaption,
+fieldset,
+button {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+}
+
+li,
+dt,
+dd {
+  list-style: none;
+}
+
+figure,
+figcaption {
+  display: block;
+}
+
+em,
+strong,
+b {
+  font-style: normal;
+  font-weight: bold;
+}
+
+sub,
+sup {
+  font-size: 0.5em;
+}
+
+dfn {
+  font-style: normal;
+}
+
+iframe {
+  width: 100%;
+}
+
+label {
+  cursor: pointer;
+}
+
+input {
+  &::-ms-clear {
+    visibility: hidden;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+select {
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+input,
+button,
+select,
+textarea,
+[role="button"] {
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}

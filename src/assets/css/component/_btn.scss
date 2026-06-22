@@ -1,0 +1,77 @@
+@use "../global" as *;
+
+.c-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: px2rem(8) px2rem(16) px2rem(10);
+  font-weight: 500;
+  line-height: 1.5;
+
+  @include mq {
+    min-width: px2rem(200);
+  }
+
+  .c-btn__text {
+    display: flex;
+    gap: px2rem(4);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    &-right {
+      justify-content: space-between;
+    }
+  }
+
+  &__primary {
+    color: var(--color-black);
+    background: var(--color-white);
+    border: 1px solid var(--color-black);
+
+    @include hover {
+      color: var(--color-white);
+      background: var(--color-black);
+    }
+  }
+
+  &__secondary {
+    color: var(--color-blue);
+    background: var(--color-white);
+    border: 1px solid var(--color-blue);
+
+    @include hover {
+      color: var(--color-white);
+      background: var(--color-blue);
+    }
+  }
+
+  &[target="_blank"] {
+    .c-btn__text {
+      justify-content: center;
+    }
+  }
+}
+
+.c-btn__icon {
+  display: inline-block;
+  width: px2rem(16);
+  height: px2rem(16);
+  line-height: 1;
+  background-color: currentcolor;
+  mask-repeat: no-repeat;
+  mask-position: bottom center;
+  mask-size: contain;
+}
+
+.icon-blank {
+  mask-image: url('/assets/images/common/icon-blank.svg');
+}
+
+.icon-chervon-right {
+  width: px2rem(12);
+  height: px2rem(14);
+  mask-image: url('/assets/images/common/icon-chervon-right.svg');
+}

@@ -1,0 +1,54 @@
+@use "../var";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:string";
+
+
+
+/* ============================================================
+  Font Size
+============================================================ */
+
+
+@function perview($num, $range: below, $unit: vw) {
+  $width: var.$reference-viewport-sp;
+
+  @if $range == above {
+    $width: var.$reference-viewport-pc;
+  }
+
+  $value: math.div($num, $width) * 10000vw;
+
+  @if $unit == percentage {
+    $value: math.percentage(math.div($num, $width) * 100);
+  }
+
+  @return math.div(math.round($value), 100);
+}
+
+@function perwidth($num, $width) {
+  @return math.div(math.round(math.percentage(math.div($num, $width) * 100)),
+    100);
+}
+
+@function px2rem($num) {
+  // pxが含まれている場合は数値のみを抽出
+  $value: if(meta.type-of($num) == string and string.str-index($num, "px"),
+      math.div(str-replace($num, "px", ""), 16),
+      math.div($num, 16));
+
+  @return #{$value}rem;
+}
+
+// 文字列置換のためのヘルパー関数
+@function str-replace($string, $search, $replace: "") {
+  $index: string.str-index($string, $search);
+
+  @if $index {
+    $after: string.str-slice($string, $index + string.str-length($search));
+
+    @return string.str-slice($string, 1, $index - 1) + $replace + $after;
+  }
+
+  @return $string;
+}

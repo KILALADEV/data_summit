@@ -1,0 +1,23 @@
+@use "../global" as *;
+
+.u-visible-sp {
+  @include mq {
+    display: none !important;
+  }
+}
+
+.u-visible-pc {
+  @include mq(below) {
+    display: none !important;
+  }
+}
+
+.u-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}

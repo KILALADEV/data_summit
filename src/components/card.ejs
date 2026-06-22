@@ -1,0 +1,75 @@
+<%
+  class CardComponent {
+    constructor(props = {}) {
+      this.isVisible = props.isVisible !== false;
+      this.className = props.className || '';
+
+      // LINK CHỈ ÁP DỤNG RIÊNG CHO ẢNH
+      this.url = props.url || '';
+      this.target = props.target || '_self';
+
+      this.title = props.title || '';
+      this.desc = props.desc || '';
+
+      this.imageConfig = props.image || null;
+      this.buttonConfig = props.button || null;
+      this.direction = props.direction || 'top';
+
+      this.rel = this.target === '_blank' ? 'rel="noopener noreferrer"' : '';
+    }
+
+    shouldRender() {
+      return this.isVisible;
+    }
+
+    // Kiểm tra xem ảnh có link đi kèm hay không
+    hasLink() {
+      return String(this.url).trim() !== '';
+    }
+
+    getDirectionClass() {
+      return `c-card--dir-${this.direction}`;
+    }
+  }
+
+  const card = new CardComponent(locals.props);
+%>
+
+<% if (card.shouldRender()) { %>
+  <div class="c-card <%= card.getDirectionClass() %> <%= card.className %>">
+
+    <% if (card.imageConfig) { %>
+      <% if (card.hasLink()) { %>
+        <a href="<%= card.url %>" target="<%= card.target %>" <%- card.rel %> class="c-card__thumb-link">
+      <% } %>
+
+      <figure class="c-card__thumb">
+        <img src="<%= card.imageConfig.src || '' %>"
+             alt="<%= card.title || card.imageConfig.alt || 'Card Image' %>"
+             class="<%= card.imageConfig.className || 'c-card__image' %>"
+             loading="<%= card.imageConfig.loading || 'lazy' %>"/>
+      </figure>
+
+      <% if (card.hasLink()) { %>
+        </a>
+      <% } %>
+    <% } %>
+
+    <div class="c-card__body">
+      <% if (card.title) { %>
+        <h3 class="c-card__title"><%= card.title %></h3>
+      <% } %>
+
+      <% if (card.desc) { %>
+        <p class="c-card__desc"><%= card.desc %></p>
+      <% } %>
+
+      <% if (card.buttonConfig) { %>
+        <div class="c-card__action">
+          <%- include('./button', { props: card.buttonConfig }) %>
+        </div>
+      <% } %>
+    </div>
+
+  </div>
+<% } %>

@@ -1,0 +1,9 @@
+@use "../global" as *;
+
+.l-footer {
+  position: relative;
+  padding: px2rem(50) px2rem(20);
+  font-size: px2rem(20);
+  color: var(--color-white);
+  background: var(--color-black);
+}
