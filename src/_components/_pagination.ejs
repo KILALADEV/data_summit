@@ -1,0 +1,44 @@
+<%_
+/**
+ * pagination
+ * @description: Component chuyển trang
+ */
+let data = {
+  currentPage: 1,
+  totalPages: 1,
+  baseUrl: '?page='
+}
+if (typeof props !== 'undefined') {
+  data.currentPage = typeof props.currentPage !== 'undefined' ? parseInt(props.currentPage) : data.currentPage;
+  data.totalPages = typeof props.totalPages !== 'undefined' ? parseInt(props.totalPages) : data.totalPages;
+  data.baseUrl = typeof props.baseUrl !== 'undefined' ? props.baseUrl : data.baseUrl;
+}
+_%>
+
+<% if (data.totalPages > 1) { %>
+  <nav class="c-pagination" aria-label="Pagination">
+    <a href="<%= data.baseUrl %><%= data.currentPage - 1 %>" 
+       class="c-pagination__btn c-pagination__btn--prev <%= data.currentPage === 1 ? 'is-disabled' : '' %>"
+       <%= data.currentPage === 1 ? 'tabindex="-1" aria-disabled="true"' : '' %>>
+       Trước
+    </a>
+
+    <ul class="c-pagination__list">
+      <% for(let i = 1; i <= data.totalPages; i++) { %>
+        <li class="c-pagination__item">
+          <a href="<%= data.baseUrl %><%= i %>" 
+             class="c-pagination__link <%= i === data.currentPage ? 'is-active' : '' %>"
+             <%= i === data.currentPage ? 'aria-current="page"' : '' %>>
+            <%= i %>
+          </a>
+        </li>
+      <% } %>
+    </ul>
+
+    <a href="<%= data.baseUrl %><%= data.currentPage + 1 %>" 
+       class="c-pagination__btn c-pagination__btn--next <%= data.currentPage === data.totalPages ? 'is-disabled' : '' %>"
+       <%= data.currentPage === data.totalPages ? 'tabindex="-1" aria-disabled="true"' : '' %>>
+       Sau
+    </a>
+  </nav>
+<% } %>

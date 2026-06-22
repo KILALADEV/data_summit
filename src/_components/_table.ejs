@@ -1,0 +1,41 @@
+<%_
+/**
+ * table
+ * @description: Component hiển thị bảng dữ liệu (Table)
+ */
+let tableData = {
+  headings: [],  // Mảng tiêu đề cột, ví dụ: ['Tính năng', 'Thông số']
+  rows: []       // Mảng các dòng dữ liệu, ví dụ: [['RAM', '16GB'], ['Storage', '512GB']]
+}
+
+// Gán giá trị từ props nếu có
+if (typeof props !== 'undefined') {
+  tableData.headings = typeof props.headings !== 'undefined' ? props.headings : tableData.headings;
+  tableData.rows = typeof props.rows !== 'undefined' ? props.rows : tableData.rows;
+}
+_%>
+
+<% if (tableData.rows && tableData.rows.length > 0) { %>
+  <div class="c-table-wrapper">
+    <table class="c-table">
+      <% if (tableData.headings && tableData.headings.length > 0) { %>
+        <thead>
+          <tr>
+            <% tableData.headings.forEach(function(heading) { %>
+              <th><%= heading %></th>
+            <%_ }); _%>
+          </tr>
+        </thead>
+      <% } %>
+      <tbody>
+        <% tableData.rows.forEach(function(row) { %>
+          <tr>
+            <% row.forEach(function(cell) { %>
+              <td><%= cell %></td>
+            <%_ }); _%>
+          </tr>
+        <%_ }); _%>
+      </tbody>
+    </table>
+  </div>
+<% } %>

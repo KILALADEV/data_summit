@@ -1,0 +1,21 @@
+<%_
+/**
+ * title
+ * @description: titleコンポーネント (Chỉ hiển thị tiêu đề h1 - h4)
+ */
+let data = {
+  title: 'Đây là title',
+  tag: 'h1',
+  class: '' 
+}
+
+if (typeof props !== 'undefined') {
+  data.title = typeof props.title !== 'undefined' ? props.title : data.title;
+  data.tag = typeof props.tag !== 'undefined' ? props.tag : data.tag;
+  data.class = typeof props.class !== 'undefined' ? props.class : data.class;
+}
+_%>
+
+<<%= data.tag %> class="c-title <%= data.class %>">
+  <%= data.title %>
+</<%= data.tag %>>

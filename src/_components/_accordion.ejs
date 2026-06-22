@@ -1,0 +1,31 @@
+<%_
+/**
+ * accordion
+ * @description: Component đóng mở nội dung (Accordion)
+ */
+let data = {
+  items: []  // Mảng chứa các object dạng { title: '...', content: '...' }
+}
+
+// Gán giá trị từ props nếu có
+if (typeof props !== 'undefined') {
+  data.items = typeof props.items !== 'undefined' ? props.items : data.items;
+}
+_%>
+
+<% if (data.items && data.items.length > 0) { %>
+  <div class="c-accordion">
+    <% data.items.forEach(function(item, index) { %>
+      <div class="c-accordion__item">
+        <button class="c-accordion__button" type="button" aria-expanded="false">
+          <%= item.title %>
+        </button>
+        <div class="c-accordion__panel" style="display: none;">
+          <div class="c-accordion__content">
+            <%= item.content %>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+<% } %>

@@ -1,0 +1,34 @@
+<%_
+/**
+ * video
+ * @description: videoコンポーネント
+ */
+// TODO: 画像関連は多彩なのであとから拡張する
+let data = {
+  src: [
+    'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20video',
+    'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20video',
+    'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20video',
+  ],
+  text:'動画を再生するには、videoタグをサポートしたブラウザが必要です。',
+  width: '400',
+  height: '300',
+  poster: 'http://placehold.jp/d0d0d2/ffffff/720x405.png?text=video%20poster',
+  aspect: '16-9',
+}
+data.src = typeof props !== 'undefined' && typeof props.src !== 'undefined' ? props.src : data.src
+data.text = typeof props !== 'undefined' && typeof props.text !== 'undefined' ? props.text : data.text
+data.width = typeof props !== 'undefined' && typeof props.width !== 'undefined' ? props.width : data.width
+data.height = typeof props !== 'undefined' && typeof props.height !== 'undefined' ? props.height : data.height
+data.poster = typeof props !== 'undefined' && typeof props.poster !== 'undefined' ? props.poster : data.poster
+data.aspect = typeof props !== 'undefined' && typeof props.aspect !== 'undefined' ? props.aspect : data.aspect
+_%>
+
+<div class="c-video <%- data.aspect ? `c-video--${data.aspect}` : '' %>">
+  <video controls autoplay poster="<%= data.poster %>" width="<%= data.width %>" height="<%= data.height %>" class="c-video__view">
+    <% data.src.forEach((item) => { %>
+      <source src="<%= item %>">
+    <% }) %>
+    <p><%= data.text %></p>
+  </video>
+</div>

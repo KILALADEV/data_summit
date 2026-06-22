@@ -1,0 +1,41 @@
+<%_
+/**
+ * tabs
+ * @description: Component thanh tab nội dung
+ */
+let data = {
+  id: 'tabs-' + Math.random().toString(36).substr(2, 9), // Tạo ID ngẫu nhiên để tránh trùng lặp aria
+  items: [] // Mảng chứa { title: '...', content: '...' }
+}
+if (typeof props !== 'undefined') {
+  data.items = typeof props.items !== 'undefined' ? props.items : data.items;
+}
+_%>
+
+<% if (data.items && data.items.length > 0) { %>
+  <div class="c-tabs" id="<%= data.id %>">
+    <div class="c-tabs__nav" role="tablist">
+      <% data.items.forEach(function(item, index) { %>
+        <button class="c-tabs__trigger <%= index === 0 ? 'is-active' : '' %>" 
+                role="tab" 
+                aria-selected="<%= index === 0 ? 'true' : 'false' %>"
+                aria-controls="<%= data.id %>-panel-${index}"
+                id="<%= data.id %>-tab-${index}">
+          <%= item.title %>
+        </button>
+      <% }); %>
+    </div>
+
+    <div class="c-tabs__content">
+      <% data.items.forEach(function(item, index) { %>
+        <div class="c-tabs__panel <%= index === 0 ? 'is-active' : '' %>" 
+             id="<%= data.id %>-panel-${index}"
+             role="tabpanel" 
+             aria-labelledby="<%= data.id %>-tab-${index}"
+             <% if(index > 0) { %> hidden <% } %>>
+          <%= item.content %>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+<% } %>

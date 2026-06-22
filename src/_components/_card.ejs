@@ -1,0 +1,76 @@
+<%_
+/**
+ * card
+ * @description: Component hiển thị thông tin dạng thẻ (Card) có tích hợp Button
+ */
+let data = {
+  image: '',       // Đường dẫn hình ảnh
+  badge: '',       // Nhãn nhỏ (ví dụ: "New", "Hot")
+  title: '',       // Tiêu đề card
+  description: '', // Nội dung mô tả ngắn
+  link: '',        // Đường dẫn khi click vào card (nếu có)
+  target: '_self', // Thuộc tính target của link (ví dụ: _blank)
+  buttonLabel: ''  // Chữ hiển thị trên button (nếu muốn có button)
+}
+
+// Gán giá trị từ props nếu có
+if (typeof props !== 'undefined') {
+  data.image = typeof props.image !== 'undefined' ? props.image : data.image;
+  data.badge = typeof props.badge !== 'undefined' ? props.badge : data.badge;
+  data.title = typeof props.title !== 'undefined' ? props.title : data.title;
+  data.description = typeof props.description !== 'undefined' ? props.description : data.description;
+  data.link = typeof props.link !== 'undefined' ? props.link : data.link;
+  data.target = typeof props.target !== 'undefined' ? props.target : data.target;
+  data.buttonLabel = typeof props.buttonLabel !== 'undefined' ? props.buttonLabel : data.buttonLabel;
+}
+
+// Xác định thẻ bọc ngoài cùng dựa vào việc có link và KHÔNG có button
+// (Nếu có button bên trong, ta giữ thẻ ngoài là 'div' để tránh lỗi lồng thẻ <a> trong <a>)
+let wrapperTag = (data.link && !data.buttonLabel) ? 'a' : 'div';
+_%>
+
+<<%= wrapperTag %> 
+  class="c-card <%= (data.link && !data.buttonLabel) ? 'c-card--link' : '' %>" 
+  <% if (wrapperTag === 'a') { %> href="<%= data.link %>" target="<%= data.target %>" <% } %>
+>
+  <% if (data.image) { %>
+    <figure class="c-card__thumb">
+      <img src="<%= data.image %>" alt="<%= data.title %>" class="c-card__image" loading="lazy">
+      <% if (data.badge) { %>
+        <span class="c-card__badge"><%= data.badge %></span>
+      <% } %>
+    </figure>
+  <% } %>
+
+  <div class="c-card__content">
+    <% if (data.title) { %>
+      <h3 class="c-card__title">
+        <% if (data.link && data.buttonLabel) { %>
+          <a href="<%= data.link %>" target="<%= data.target %>" class="c-card__title-link">
+            <%= data.title %>
+          </a>
+        <% } else { %>
+          <%= data.title %>
+        <% } %>
+      </h3>
+    <% } %>
+
+    <% if (data.description) { %>
+      <p class="c-card__description">
+        <%= data.description %>
+      </p>
+    <% } %>
+
+    <% if (data.buttonLabel) { %>
+      <div class="c-card__action">
+        <%- include('button', { 
+          props: { 
+            label: data.buttonLabel, 
+            link: data.link, 
+            target: data.target 
+          } 
+        }) %>
+      </div>
+    <% } %>
+  </div>
+</<%= wrapperTag %>>

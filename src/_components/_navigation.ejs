@@ -1,0 +1,40 @@
+<%_
+/**
+ * navigation
+ * @description: Component thanh điều hướng (Menu) tinh gọn, hỗ trợ menu 2 cấp
+ */
+let data = {
+  menuItems: [] // Mảng chứa các object dạng: { label: 'Home', link: '/', submenu: [{ label: 'Sub 1', link: '/sub1' }] }
+}
+
+if (typeof props !== 'undefined') {
+  data.menuItems = typeof props.menuItems !== 'undefined' ? props.menuItems : data.menuItems;
+}
+_%>
+
+<% if (data.menuItems && data.menuItems.length > 0) { %>
+  <nav class="c-nav">
+    <ul class="c-nav__list">
+      <% data.menuItems.forEach(function(item) { %>
+        <% let hasSub = item.submenu && item.submenu.length > 0; %>
+        <li class="c-nav__item <%= hasSub ? 'c-nav__item--has-dropdown' : '' %>">
+          <a href="<%= item.link || '#' %>" class="c-nav__link">
+            <%= item.label %>
+          </a>
+          
+          <% if (hasSub) { %>
+            <ul class="c-nav__dropdown">
+              <% item.submenu.forEach(function(subItem) { %>
+                <li class="c-nav__dropdown-item">
+                  <a href="<%= subItem.link %>" class="c-nav__dropdown-link">
+                    <%= subItem.label %>
+                  </a>
+                </li>
+              <% }); %>
+            </ul>
+          <% } %>
+        </li>
+      <% }); %>
+    </ul>
+  </nav>
+<% } %>

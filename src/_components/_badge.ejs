@@ -1,0 +1,20 @@
+<%_
+/**
+ * badge
+ * @description: Component nhãn trạng thái / màu sắc
+ */
+let data = {
+  label: '',
+  type: 'default' // 'default', 'success', 'warning', 'danger', 'info'
+}
+if (typeof props !== 'undefined') {
+  data.label = typeof props.label !== 'undefined' ? props.label : data.label;
+  data.type = typeof props.type !== 'undefined' ? props.type : data.type;
+}
+_%>
+
+<% if (data.label) { %>
+  <span class="c-badge c-badge--<%= data.type %>">
+    <%= data.label %>
+  </span>
+<% } %>

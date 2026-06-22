@@ -1,0 +1,51 @@
+<%_
+/**
+ * select
+ * @description: Component menu tùy chọn xổ xuống
+ */
+let data = {
+  id: 'select-' + Math.random().toString(36).substr(2, 9),
+  label: '',
+  options: [],        // Mảng chứa các object dạng: { value: 'vn', label: 'Việt Nam', selected: false }
+  required: false,
+  disabled: false,
+  errorMessage: ''
+}
+
+if (typeof props !== 'undefined') {
+  data.id = typeof props.id !== 'undefined' ? props.id : data.id;
+  data.label = typeof props.label !== 'undefined' ? props.label : data.label;
+  data.options = typeof props.options !== 'undefined' ? props.options : data.options;
+  data.required = typeof props.required !== 'undefined' ? props.required : data.required;
+  data.disabled = typeof props.disabled !== 'undefined' ? props.disabled : data.disabled;
+  data.errorMessage = typeof props.errorMessage !== 'undefined' ? props.errorMessage : data.errorMessage;
+}
+_%>
+
+<div class="c-field <%= data.errorMessage ? 'has-error' : '' %> <%= data.disabled ? 'is-disabled' : '' %>">
+  <% if (data.label) { %>
+    <label for="<%= data.id %>" class="c-field__label">
+      <%= data.label %>
+      <% if (data.required) { %><span class="c-field__required">*</span><% } %>
+    </label>
+  <% } %>
+
+  <div class="c-field__control c-field__control--select">
+    <select 
+      id="<%= data.id %>" 
+      class="c-field__select"
+      <%= data.required ? 'required' : '' %>
+      <%= data.disabled ? 'disabled' : '' %>
+    >
+      <% data.options.forEach(function(option) { %>
+        <option value="<%= option.value %>" <%= option.selected ? 'selected' : '' %>>
+          <%= option.label %>
+        </option>
+      <% }); %>
+    </select>
+  </div>
+
+  <% if (data.errorMessage) { %>
+    <p class="c-field__error-message"><%= data.errorMessage %></p>
+  <% } %>
+</div>

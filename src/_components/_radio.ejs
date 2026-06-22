@@ -1,0 +1,20 @@
+<%_
+/**
+ * radio
+ * @description: radioコンポーネント
+ */
+let data = {
+  label:'ラジオボタン',
+  name: 'radio',
+  id: 'radio',
+  size: '',
+}
+data.label = typeof props !== 'undefined' && typeof props.label !== 'undefined' ? props.label : data.label
+data.name = typeof props !== 'undefined' && typeof props.name !== 'undefined' ? props.name : data.name
+data.id = typeof props !== 'undefined' && typeof props.id !== 'undefined' ? props.id : data.id
+data.size = typeof props !== 'undefined' && typeof props.size !== 'undefined' ? props.size : data.size
+_%>
+<label class="c-radio">
+  <input type="radio" name="<%= data.name %>" id="<%= data.id %>" class="c-radio__input <%- data.size ? `c-radio__input--${data.size}` : '' %>">
+  <span class="c-radio__label"><%= data.label %></span>
+</label>

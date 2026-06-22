@@ -1,0 +1,30 @@
+<%_
+/**
+ * alert
+ * @description: Component hộp thoại thông báo trạng thái nhanh (Success, Error, Warning)
+ */
+let data = {
+  type: 'info',       // info, success, warning, danger
+  message: '',        // Nội dung thông báo
+  closable: true      // Có hiển thị nút X để tắt không
+}
+
+if (typeof props !== 'undefined') {
+  data.type = typeof props.type !== 'undefined' ? props.type : data.type;
+  data.message = typeof props.message !== 'undefined' ? props.message : data.message;
+  data.closable = typeof props.closable !== 'undefined' ? props.closable : data.closable;
+}
+_%>
+
+<% if (data.message) { %>
+  <div class="c-alert c-alert--<%= data.type %>" role="alert">
+    <div class="c-alert__content">
+      <%= data.message %>
+    </div>
+    <% if (data.closable) { %>
+      <button type="button" class="c-alert__close" aria-label="Close" onclick="this.parentElement.style.display='none';">
+        &times;
+      </button>
+    <% } %>
+  </div>
+<% } %>

@@ -1,0 +1,43 @@
+<%_
+/**
+ * dropdown
+ * @description: dropdownコンポーネント
+ */
+let data = {
+  label:'',
+  name: 'dropdown',
+  id: 'dropdown',
+  full: false,
+  list: [
+    {
+      text: 'ドロップダウン1',
+      value: 'dropdown1',
+    },
+    {
+      text: 'ドロップダウン2',
+      value: 'dropdown2',
+    },
+    {
+      text: 'ドロップダウン3',
+      value: 'dropdown3',
+    },
+  ],
+}
+data.label = typeof props !== 'undefined' && typeof props.label !== 'undefined' ? props.label : data.label
+data.name = typeof props !== 'undefined' && typeof props.name !== 'undefined' ? props.name : data.name
+data.id = typeof props !== 'undefined' && typeof props.id !== 'undefined' ? props.id : data.id
+data.full = typeof props !== 'undefined' && typeof props.full !== 'undefined' ? props.full : data.full
+data.list = typeof props !== 'undefined' && typeof props.list !== 'undefined' ? props.list : data.list
+_%>
+<label for="<%= data.id %>" class="c-dropdown">
+  <% if(data.label) { %>
+  <span class="c-dropdown__label"><%= data.label %></span>
+  <% } %>
+  <span class="c-dropdown__select">
+    <select name="<%= data.name %>" id="<%= data.id %>" class="c-dropdown__select_inner <%= data.full ? 'c-dropdown__select_inner--full' : '' %>">
+      <% data.list.forEach((item) => { %>
+      <option value="<%= item.value %>"><%= item.text %></option>
+      <% }) %>
+    </select>
+  </span>
+</label>

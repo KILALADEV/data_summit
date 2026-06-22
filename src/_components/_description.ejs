@@ -1,0 +1,21 @@
+<%_
+/**
+ * description
+ * @description: descriptionコンポーネント
+ */
+let data = {
+  desc: 'Đây là description',
+  tag: 'p',
+  class: '' 
+}
+
+if (typeof props !== 'undefined') {
+  data.desc = typeof props.desc !== 'undefined' ? props.desc : data.desc;
+  data.tag = typeof props.tag !== 'undefined' ? props.tag : data.tag;
+  data.class = typeof props.class !== 'undefined' ? props.class : data.class;
+}
+_%>
+
+<<%= data.tag %> class="c-desc <%= data.class %>">
+  <%= data.desc %>
+</<%= data.tag %>>

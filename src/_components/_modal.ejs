@@ -1,0 +1,33 @@
+<%_
+/**
+ * modal
+ * @description: Component hộp thoại popup cố định
+ */
+let data = {
+  id: 'modal-' + Math.random().toString(36).substr(2, 9),
+  title: '',
+  body: '',
+  size: 'normal' // 'small', 'normal', 'large'
+}
+if (typeof props !== 'undefined') {
+  data.title = typeof props.title !== 'undefined' ? props.title : data.title;
+  data.body = typeof props.body !== 'undefined' ? props.body : data.body;
+  data.size = typeof props.size !== 'undefined' ? props.size : data.size;
+}
+_%>
+
+<div class="c-modal c-modal--<%= data.size %>" id="<%= data.id %>" aria-hidden="true" role="dialog">
+  <div class="c-modal__overlay" tabindex="-1" data-close></div>
+  <div class="c-modal__container">
+    
+    <div class="c-modal__header">
+      <h2 class="c-modal__title"><%= data.title %></h2>
+      <button class="c-modal__close" aria-label="Close modal" data-close>&times;</button>
+    </div>
+
+    <div class="c-modal__body">
+      <%= data.body %>
+    </div>
+    
+  </div>
+</div>
