@@ -1,10 +1,11 @@
 <%_
 /**
  * select
- * @description: Component menu tùy chọn xổ xuống
+ * @description: Component select
  */
 let data = {
-  id: 'select-' + Math.random().toString(36).substr(2, 9),
+  id: 'select-' + Math.random().toString(36).substring(2, 9),
+  name: '',           // Tên trường dữ liệu (Bắt buộc phải có để submit Form native và định danh SEO)
   label: '',
   options: [],        // Mảng chứa các object dạng: { value: 'vn', label: 'Việt Nam', selected: false }
   required: false,
@@ -14,28 +15,40 @@ let data = {
 
 if (typeof props !== 'undefined') {
   data.id = typeof props.id !== 'undefined' ? props.id : data.id;
+  data.name = typeof props.name !== 'undefined' ? props.name : data.name || data.id; // Fallback lấy id làm name nếu thiếu
   data.label = typeof props.label !== 'undefined' ? props.label : data.label;
   data.options = typeof props.options !== 'undefined' ? props.options : data.options;
   data.required = typeof props.required !== 'undefined' ? props.required : data.required;
   data.disabled = typeof props.disabled !== 'undefined' ? props.disabled : data.disabled;
   data.errorMessage = typeof props.errorMessage !== 'undefined' ? props.errorMessage : data.errorMessage;
 }
+
+// Tạo ID định danh riêng cho thẻ báo lỗi
+let errorId = `err-${data.id}`;
 _%>
 
 <div class="c-field <%= data.errorMessage ? 'has-error' : '' %> <%= data.disabled ? 'is-disabled' : '' %>">
   <% if (data.label) { %>
     <label for="<%= data.id %>" class="c-field__label">
       <%= data.label %>
-      <% if (data.required) { %><span class="c-field__required">*</span><% } %>
+      <% if (data.required) { %>
+        <span class="c-field__required" aria-hidden="true">*</span>
+      <% } %>
     </label>
   <% } %>
 
   <div class="c-field__control c-field__control--select">
-    <select 
-      id="<%= data.id %>" 
+    <select
+      id="<%= data.id %>"
+      name="<%= data.name %>"
       class="c-field__select"
-      <%= data.required ? 'required' : '' %>
-      <%= data.disabled ? 'disabled' : '' %>
+      <% if (data.required) { %> required aria-required="true" <% } %>
+      <% if (data.disabled) { %> disabled <% } %>
+
+      <% if (data.errorMessage) { %>
+        aria-invalid="true"
+        aria-describedby="<%= errorId %>"
+      <% } %>
     >
       <% data.options.forEach(function(option) { %>
         <option value="<%= option.value %>" <%= option.selected ? 'selected' : '' %>>
@@ -43,9 +56,14 @@ _%>
         </option>
       <% }); %>
     </select>
+
+    <span class="c-field__select-icon" aria-hidden="true"></span>
   </div>
 
   <% if (data.errorMessage) { %>
-    <p class="c-field__error-message"><%= data.errorMessage %></p>
+    <p id="<%= errorId %>" class="c-field__error-message" role="alert">
+      <%= data.errorMessage %>
+    </p>
   <% } %>
+
 </div>

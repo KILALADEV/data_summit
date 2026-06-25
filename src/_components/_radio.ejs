@@ -1,20 +1,44 @@
 <%_
 /**
  * radio
- * @description: radioコンポーネント
+ * @description: Radioコンポーネント
  */
 let data = {
-  label:'ラジオボタン',
+  label: 'ラジオボタン',
   name: 'radio',
-  id: 'radio',
-  size: '',
+  id: 'radio-' + Math.random().toString(36).substring(2, 9), // Tự động tạo ID duy nhất nếu dev quên truyền
+  size: '',         // 'sm', 'lg'
+  checked: false,   // Trạng thái tích chọn mặc định
+  disabled: false,  // Trạng thái vô hiệu hóa
+  required: false   // Trạng thái bắt buộc điền
 }
-data.label = typeof props !== 'undefined' && typeof props.label !== 'undefined' ? props.label : data.label
-data.name = typeof props !== 'undefined' && typeof props.name !== 'undefined' ? props.name : data.name
-data.id = typeof props !== 'undefined' && typeof props.id !== 'undefined' ? props.id : data.id
-data.size = typeof props !== 'undefined' && typeof props.size !== 'undefined' ? props.size : data.size
+
+if (typeof props !== 'undefined') {
+  data.label = typeof props.label !== 'undefined' ? props.label : data.label;
+  data.name = typeof props.name !== 'undefined' ? props.name : data.name;
+  data.id = typeof props.id !== 'undefined' ? props.id : data.id;
+  data.size = typeof props.size !== 'undefined' ? props.size : data.size;
+  data.checked = typeof props.checked !== 'undefined' ? props.checked : data.checked;
+  data.disabled = typeof props.disabled !== 'undefined' ? props.disabled : data.disabled;
+  data.required = typeof props.required !== 'undefined' ? props.required : data.required;
+}
 _%>
-<label class="c-radio">
-  <input type="radio" name="<%= data.name %>" id="<%= data.id %>" class="c-radio__input <%- data.size ? `c-radio__input--${data.size}` : '' %>">
-  <span class="c-radio__label"><%= data.label %></span>
+
+<label class="c-radio <%= data.disabled ? 'is-disabled' : '' %>" for="<%= data.id %>">
+  <input
+    type="radio"
+    name="<%= data.name %>"
+    id="<%= data.id %>"
+    class="c-radio__input <%- data.size ? `c-checkbox__input--${data.size}` : '' %>"
+    <% if (data.checked) { %> checked <% } %>
+    <% if (data.disabled) { %> disabled <% } %>
+    <% if (data.required) { %> required aria-required="true" <% } %>
+  >
+
+  <span class="c-radio__label">
+    <%= data.label %>
+    <% if (data.required) { %>
+      <span class="c-radio__required" aria-hidden="true">*</span>
+    <% } %>
+  </span>
 </label>

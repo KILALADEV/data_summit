@@ -1,18 +1,19 @@
 <%_
 /**
  * columns
- * @description: Component quản lý layout chia cột (Grid/Columns System) cho các sub-component như Card.
+ * @description: Component Layout
  */
 let data = {
-  cols: 3,         // Số cột mặc định trên Desktop (ví dụ: 1, 2, 3, 4)
-  cols_md: 2,      // Số cột trên Tablet (màn hình trung bình)
-  cols_sm: 1,      // Số cột trên Mobile (màn hình nhỏ)
-  gap: 'normal',   // Khoảng cách giữa các cột: 'none', 'small', 'normal', 'large'
-  items: []        // Mảng chứa dữ liệu của các component con (ví dụ: mảng các props của Card)
+  tag: 'div',      // Thẻ bọc ngoài cùng mặc định: 'div', 'ul', 'section', 'nav'...
+  cols: 3,
+  cols_md: 2,
+  cols_sm: 1,
+  gap: 'normal',
+  items: []
 }
 
-// Gán giá trị từ props nếu có
 if (typeof props !== 'undefined') {
+  data.tag = typeof props.tag !== 'undefined' ? props.tag : data.tag;
   data.cols = typeof props.cols !== 'undefined' ? props.cols : data.cols;
   data.cols_md = typeof props.cols_md !== 'undefined' ? props.cols_md : data.cols_md;
   data.cols_sm = typeof props.cols_sm !== 'undefined' ? props.cols_sm : data.cols_sm;
@@ -20,7 +21,8 @@ if (typeof props !== 'undefined') {
   data.items = typeof props.items !== 'undefined' ? props.items : data.items;
 }
 
-// Tạo danh sách class modifiers cho layout dựa trên số cột và khoảng cách
+let itemTag = (data.tag === 'ul' || data.tag === 'ol') ? 'li' : 'div';
+
 let modifierClasses = [];
 if (data.cols) modifierClasses.push(`l-columns--desktop-${data.cols}`);
 if (data.cols_md) modifierClasses.push(`l-columns--tablet-${data.cols_md}`);
@@ -29,11 +31,11 @@ if (data.gap) modifierClasses.push(`l-columns--gap-${data.gap}`);
 _%>
 
 <% if (data.items && data.items.length > 0) { %>
-  <div class="l-columns <%= modifierClasses.join(' ') %>">
+  <<%= data.tag %> class="l-columns <%= modifierClasses.join(' ') %>">
     <% data.items.forEach(function(item) { %>
-      <div class="l-columns__item">
+      <<%= itemTag %> class="l-columns__item">
         <%- include('card', { props: item }) %>
-      </div>
+      </<%= itemTag %>>
     <%_ }); _%>
-  </div>
+  </<%= data.tag %>>
 <% } %>

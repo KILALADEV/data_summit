@@ -1,14 +1,15 @@
 <%_
 /**
  * textarea
- * @description: Component ô nhập liệu văn bản dài
+ * @description: Component textarea
  */
 let data = {
-  id: 'textarea-' + Math.random().toString(36).substr(2, 9),
+  id: 'textarea-' + Math.random().toString(36).substring(2, 9),
+  name: '',           // Tên trường dữ liệu (Bắt buộc phải có cho SEO/Submit Form)
   label: '',
   placeholder: '',
   value: '',
-  rows: 4,            // Số dòng hiển thị mặc định chiều cao
+  rows: 4,
   required: false,
   disabled: false,
   errorMessage: ''
@@ -16,6 +17,7 @@ let data = {
 
 if (typeof props !== 'undefined') {
   data.id = typeof props.id !== 'undefined' ? props.id : data.id;
+  data.name = typeof props.name !== 'undefined' ? props.name : data.name || data.id; // Fallback lấy id làm name nếu khuyết
   data.label = typeof props.label !== 'undefined' ? props.label : data.label;
   data.placeholder = typeof props.placeholder !== 'undefined' ? props.placeholder : data.placeholder;
   data.value = typeof props.value !== 'undefined' ? props.value : data.value;
@@ -24,28 +26,42 @@ if (typeof props !== 'undefined') {
   data.disabled = typeof props.disabled !== 'undefined' ? props.disabled : data.disabled;
   data.errorMessage = typeof props.errorMessage !== 'undefined' ? props.errorMessage : data.errorMessage;
 }
+
+// Tạo ID định danh riêng kết nối thông báo lỗi
+let errorId = `err-${data.id}`;
 _%>
 
 <div class="c-field <%= data.errorMessage ? 'has-error' : '' %> <%= data.disabled ? 'is-disabled' : '' %>">
+
   <% if (data.label) { %>
     <label for="<%= data.id %>" class="c-field__label">
       <%= data.label %>
-      <% if (data.required) { %><span class="c-field__required">*</span><% } %>
+      <% if (data.required) { %>
+        <span class="c-field__required" aria-hidden="true">*</span>
+      <% } %>
     </label>
   <% } %>
 
   <div class="c-field__control">
-    <textarea 
-      id="<%= data.id %>" 
+    <textarea
+      id="<%= data.id %>"
+      name="<%= data.name %>"
       class="c-field__textarea"
       rows="<%= data.rows %>"
       placeholder="<%= data.placeholder %>"
-      <%= data.required ? 'required' : '' %>
-      <%= data.disabled ? 'disabled' : '' %>
+      <% if (data.required) { %> required aria-required="true" <% } %>
+      <% if (data.disabled) { %> disabled <% } %>
+      <% if (data.errorMessage) { %>
+        aria-invalid="true"
+        aria-describedby="<%= errorId %>"
+      <% } %>
     ><%= data.value %></textarea>
   </div>
 
   <% if (data.errorMessage) { %>
-    <p class="c-field__error-message"><%= data.errorMessage %></p>
+    <p id="<%= errorId %>" class="c-field__error-message" role="alert">
+      <%= data.errorMessage %>
+    </p>
   <% } %>
+
 </div>

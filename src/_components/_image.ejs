@@ -1,57 +1,84 @@
 <%_
 /**
  * image
- * @description: imageコンポーネント
+ * @description: Imageコンポーネント
  */
-// TODO: 画像関連は多彩なのであとから拡張する
 let data = {
   src: 'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20image',
-  alt:'imageコンポーネント',
-  caption:'imageコンポーネント',
-  width: '150',
-  height: '150',
-  type: 'image', // picture, figure, image
-  list: [
-    {
-      media: '(max-width: 590px)',
-      srcset: 'http://placehold.jp/d0d0d2/ffffff/200x100.png?text=sp',
-      type: 'image/jpg',
-    },
-    {
-      media: '(min-width: 600px)',
-      srcset: 'http://placehold.jp/d0d0d2/ffffff/400x200.png?text=pc',
-      type: 'image/jpg',
-    }
-  ]
+  alt: '', // Mặc định để trống, nếu ảnh trang trí Screen Reader sẽ bỏ qua thay vì đọc text vô nghĩa
+  caption: '',
+  width: '',
+  height: '',
+  type: 'image', // image, caption, picture, responsive-figure
+  lazy: true,    // Mặc định bật lazy load. Nếu là ảnh Banner/Hero đầu trang thì set thành false để tối ưu LCP.
+  list: []
 }
-data.src = typeof props !== 'undefined' && typeof props.src !== 'undefined' ? props.src : data.src
-data.alt = typeof props !== 'undefined' && typeof props.alt !== 'undefined' ? props.alt : data.alt
-data.caption = typeof props !== 'undefined' && typeof props.caption !== 'undefined' ? props.caption : data.caption
-data.width = typeof props !== 'undefined' && typeof props.width !== 'undefined' ? props.width : data.width
-data.height = typeof props !== 'undefined' && typeof props.height !== 'undefined' ? props.height : data.height
-data.type = typeof props !== 'undefined' && typeof props.type !== 'undefined' ? props.type : data.type
-data.list = typeof props !== 'undefined' && typeof props.list !== 'undefined' ? props.list : data.list
-_%>
-  <%_ if(data.type === 'caption') { _%>
-  <figure class="c-image__figure">
-    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
-    <figcaption class="c-image__caption"><%= data.caption %></figcaption>
-  </figure>
-  <%_ } else if(data.type === 'picture') { _%>
-  <picture class="c-image__picture">
-    <% data.list.forEach((item) => { %>
-      <source srcset="<%= item.srcset %>" <%- item.media ? `media="${item.media}"` : '' %> <%- item.type ? `type="${item.type}"` : '' %> />
-    <% }) %>
-    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
-  </picture>
-  <%_ } else if(data.type === 'figure') { _%>
-  <picture class="c-image__picture">
-    <% data.list.forEach((item) => { %>
-      <source srcset="<%= item.srcset %>" <%- item.media ? `media="${item.media}"` : '' %> <%- item.type ? `type="${item.type}"` : '' %> />
-    <% }) %>
-    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
-  </picture>
-  <%_ } else { _%>
-  <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
-  <%_ } _%>
 
+if (typeof props !== 'undefined') {
+  data.src = typeof props.src !== 'undefined' ? props.src : data.src;
+  data.alt = typeof props.alt !== 'undefined' ? props.alt : data.alt;
+  data.caption = typeof props.caption !== 'undefined' ? props.caption : data.caption;
+  data.width = typeof props.width !== 'undefined' ? props.width : data.width;
+  data.height = typeof props.height !== 'undefined' ? props.height : data.height;
+  data.type = typeof props.type !== 'undefined' ? props.type : data.type;
+  data.lazy = typeof props.lazy !== 'undefined' ? props.lazy : data.lazy;
+  data.list = typeof props.list !== 'undefined' ? props.list : data.list;
+}
+
+let imgAttributes = [];
+if (data.width) imgAttributes.push(`width="${data.width}"`);
+if (data.height) imgAttributes.push(`height="${data.height}"`);
+if (data.lazy) {
+  imgAttributes.push('loading="lazy"');
+} else {
+  // Nếu không lazy load (ảnh quan trọng), thêm fetchpriority="high" để ép trình duyệt tải sớm nhất
+  imgAttributes.push('fetchpriority="high"');
+}
+// Giúp trình duyệt giải mã hình ảnh song song, không làm block quá trình render UI
+imgAttributes.push('decoding="async"');
+_%>
+
+<%_ if (data.type === 'caption') { _%>
+  <figure class="c-image__figure">
+    <img src="<%= data.src %>" alt="<%= data.alt %>" class="c-image" <%- imgAttributes.join(' ') %> />
+    <% if (data.caption) { %>
+      <figcaption class="c-image__caption"><%= data.caption %></figcaption>
+    <% } %>
+  </figure>
+
+<%_ } else if (data.type === 'picture') { _%>
+  <picture class="c-image__picture">
+    <% data.list.forEach((item) => { %>
+      <source
+        srcset="<%= item.srcset %>"
+        <%- item.media ? `media="${item.media}"` : '' %>
+        <%- item.type ? `type="${item.type}"` : '' %>
+        <%- item.width ? `width="${item.width}"` : '' %>
+        <%- item.height ? `height="${item.height}"` : '' %>
+      />
+    <% }) %>
+    <img src="<%= data.src %>" alt="<%= data.alt %>" class="c-image" <%- imgAttributes.join(' ') %> />
+  </picture>
+
+<%_ } else if (data.type === 'responsive-figure') { _%>
+  <figure class="c-image__figure">
+    <picture class="c-image__picture">
+      <% data.list.forEach((item) => { %>
+        <source
+          srcset="<%= item.srcset %>"
+          <%- item.media ? `media="${item.media}"` : '' %>
+          <%- item.type ? `type="${item.type}"` : '' %>
+          <%- item.width ? `width="${item.width}"` : '' %>
+          <%- item.height ? `height="${item.height}"` : '' %>
+        />
+      <% }) %>
+      <img src="<%= data.src %>" alt="<%= data.alt %>" class="c-image" <%- imgAttributes.join(' ') %> />
+    </picture>
+    <% if (data.caption) { %>
+      <figcaption class="c-image__caption"><%= data.caption %></figcaption>
+    <% } %>
+  </figure>
+
+<%_ } else { _%>
+  <img src="<%= data.src %>" alt="<%= data.alt %>" class="c-image" <%- imgAttributes.join(' ') %> />
+<%_ } _%>

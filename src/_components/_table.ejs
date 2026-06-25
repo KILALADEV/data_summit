@@ -1,41 +1,55 @@
 <%_
 /**
  * table
- * @description: Component hiển thị bảng dữ liệu (Table)
+ * @description: Component table
  */
 let tableData = {
+  caption: '',   // Tiêu đề/Mô tả ngắn của bảng (Rất quan trọng cho SEO & A11y)
   headings: [],  // Mảng tiêu đề cột, ví dụ: ['Tính năng', 'Thông số']
   rows: []       // Mảng các dòng dữ liệu, ví dụ: [['RAM', '16GB'], ['Storage', '512GB']]
 }
 
-// Gán giá trị từ props nếu có
 if (typeof props !== 'undefined') {
+  tableData.caption = typeof props.caption !== 'undefined' ? props.caption : tableData.caption;
   tableData.headings = typeof props.headings !== 'undefined' ? props.headings : tableData.headings;
   tableData.rows = typeof props.rows !== 'undefined' ? props.rows : tableData.rows;
 }
 _%>
 
 <% if (tableData.rows && tableData.rows.length > 0) { %>
-  <div class="c-table-wrapper">
+  <div class="c-table-wrapper" tabindex="0" role="region" aria-label="データテーブル（横スクロール可能）">
     <table class="c-table">
+
+      <% if (tableData.caption) { %>
+        <caption class="c-table__caption"><%= tableData.caption %></caption>
+      <% } %>
+
       <% if (tableData.headings && tableData.headings.length > 0) { %>
         <thead>
           <tr>
             <% tableData.headings.forEach(function(heading) { %>
-              <th><%= heading %></th>
+              <th scope="col"><%= heading %></th>
             <%_ }); _%>
           </tr>
         </thead>
       <% } %>
+
       <tbody>
         <% tableData.rows.forEach(function(row) { %>
           <tr>
-            <% row.forEach(function(cell) { %>
-              <td><%= cell %></td>
+            <% row.forEach(function(cell, cellIndex) { %>
+
+              <% if (cellIndex === 0 && !tableData.headings.length) { %>
+                <th scope="row"><%- cell %></th>
+              <% } else { %>
+                <td><%- cell %></td>
+              <% } %>
+
             <%_ }); _%>
           </tr>
         <%_ }); _%>
       </tbody>
+
     </table>
   </div>
 <% } %>

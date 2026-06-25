@@ -1,7 +1,7 @@
 <%_
 /**
  * breadcrumb
- * @description: Component thanh điều hướng đường dẫn
+ * @description: Component Breadcrumb
  */
 let data = {
   items: [] // Mảng chứa { label: '...', link: '...' }
@@ -11,18 +11,26 @@ if (typeof props !== 'undefined') {
 }
 _%>
 
-<% if (data.items && data.items.length > 0) { %>
+<% if (data.items && data.items.length> 0) { %>
   <nav class="c-breadcrumb" aria-label="Breadcrumb">
-    <ol class="c-breadcrumb__list">
-      <% data.items.forEach(function(item, index) { %>
-        <li class="c-breadcrumb__item">
-          <% if (item.link && index < data.items.length - 1) { %>
-            <a href="<%= item.link %>" class="c-breadcrumb__link"><%= item.label %></a>
-          <% } else { %>
-            <span class="c-breadcrumb__current" aria-current="page"><%= item.label %></span>
+    <ol class="c-breadcrumb__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <% data.items.forEach(function(item, index) { let isLast=(index===data.items.length - 1); %>
+        <li class="c-breadcrumb__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <% if (item.link && !isLast) { %>
+            <a href="<%= item.link %>" class="c-breadcrumb__link" itemprop="item">
+              <span itemprop="name"><%= item.label %></span>
+            </a>
+            <% } else { %>
+            <span class="c-breadcrumb__current" aria-current="page" itemprop="item" content="<%= item.link || '' %>">
+              <span itemprop="name"><%= item.label %></span>
+            </span>
+          <% } %>
+          <meta itemprop="position" content="<%= index + 1 %>" />
+          <% if (!isLast) { %>
+            <span class="c-breadcrumb__separator" aria-hidden="true">/</span>
           <% } %>
         </li>
-      <% }); %>
+        <% }); %>
     </ol>
   </nav>
 <% } %>
