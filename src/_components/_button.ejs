@@ -1,0 +1,60 @@
+<%_
+/**
+ * component: c-button
+ * @description: Component Button
+ */
+let data = {
+  text: '',     // Chữ hiển thị trên button
+  href: '',             // Nếu có href, component sẽ tự chuyển sang thẻ <a>
+  type: '',       // button, submit, reset (chỉ dùng nếu là thẻ <button>)
+  target: '',           // _blank, _self... (chỉ dùng nếu có href)
+  variant: '',   // primary, secondary, outline, danger...
+  size: 'md',           // sm, md, lg
+  className: '',        // Các class tùy biến thêm từ bên ngoài
+  disabled: false,      // Trạng thái disable của nút
+  nofollow: false       // Bật/tắt thuộc tính rel="nofollow" khi là thẻ <a>
+}
+
+// Gán giá trị từ props nếu có
+if (typeof props !== 'undefined') {
+  for (let key in data) {
+    if (typeof props[key] !== 'undefined') {
+      data[key] = props[key];
+    }
+  }
+}
+
+// Tạo chuỗi class tổng hợp dựa trên cấu trúc BEM
+let btnClasses = `c-btn c-btn--${data.variant} c-btn--${data.size}`;
+if (data.disabled) {
+  btnClasses += ' is-disabled';
+}
+if (data.className) {
+  btnClasses += ` ${data.className}`;
+}
+
+// Xử lý thuộc tính rel cho thẻ <a>
+let relAttributes = [];
+if (data.target === '_blank') {
+  relAttributes.push('noopener', 'noreferrer');
+}
+if (data.nofollow) {
+  relAttributes.push('nofollow');
+}
+_%>
+
+<% if (data.href) { %>
+  <a href="<%= data.href %>" 
+     class="<%= btnClasses %>"
+     <% if (data.target) { %> target="<%= data.target %>" <% } %>
+     <% if (relAttributes.length > 0) { %> rel="<%= relAttributes.join(' ') %>" <% } %>
+     <% if (data.disabled) { %> tabindex="-1" aria-disabled="true" <% } %>>
+    <span class="c-btn__text"><%= data.text %></span>
+  </a>
+<% } else { %>
+  <button type="<%= data.type %>" 
+          class="<%= btnClasses %>" 
+          <% if (data.disabled) { %> disabled <% } %>>
+    <span class="c-btn__text"><%= data.text %></span>
+  </button>
+<% } %>

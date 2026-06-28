@@ -5,6 +5,7 @@ import { rimraf } from "rimraf";
 import { build as esbuild } from "esbuild";
 import fs from "fs";
 import path from "path";
+import beautify from "js-beautify";
 
 export default ({ command }) => {
   const isBuild = command === "build";
@@ -18,20 +19,19 @@ export default ({ command }) => {
       serveEjsDynamic(),
       eleventyPlugin(),
       sharpOptimizer(),
-
-      // Chỉ dọn dẹp thư mục khi build xong
       {
         name: "clean-store-folder",
         closeBundle() {
           if (isBuild) {
             rimraf("dist/assets/js/.js");
             rimraf("dist/assets/.css.");
+            rimraf("dist/assets/common.css");
+            rimraf("dist/assets/js/common.js");
             rimraf("dist/assets/images/top");
           }
         }
       },
 
-      // Chỉ bundle bằng esbuild sau khi build xong hoàn toàn
       {
         name: "post-build-esbuild-bundle",
         async closeBundle() {
@@ -57,42 +57,58 @@ export default ({ command }) => {
         }
       },
 
-      // Điều chỉnh HTML linh hoạt giữa Dev và Build
       {
         name: "html-replace-script",
-        transformIndexHtml(html) {
-          // Chuẩn hóa dấu gạch chéo
-          html = html.replace(/\\/g, "/");
-
-          // Các logic thay thế script/style ép buộc này CHỈ áp dụng khi BUILD
+        transformIndexHtml(html, ctx) {
           if (isBuild) {
-            html = html.replace(/src="\.\/assets\/js\/\.js"/g, "src=\"./assets/js/script.js\"");
-            html = html.replace(/href="\.\/assets\/\.css\."/g, "href=\"./assets/css/style.css\"");
+            const rootPath = path.resolve("src");
+            const currentHtmlPath = path.dirname(ctx.filename);
 
-            html = html.replace(/<script\s+type="module"\s+crossorigin\s+src="[^"]*assets\/js\/(script|common)\.js"><\/script>/g, "");
-            html = html.replace(/<script\s+type="module"\s+src="[^"]*assets\/js\/(script|common)\.js"><\/script>/g, "");
-            html = html.replace(/<script\s+crossorigin\s+src="[^"]*assets\/js\/(script|common)\.js"><\/script>/g, "");
+            const relativeDir = path.relative(rootPath, currentHtmlPath).replace(/\\/g, "/");
+            const depth = relativeDir ? relativeDir.split("/").filter(Boolean).length : 0;
+            const relativePrefix = depth > 0 ? "../".repeat(depth) : "./";
 
-            if (!html.includes("src=\"./assets/js/script.js\"")) {
-              html = html.replace("</body>", "<script src=\"./assets/js/script.js\" defer></script>\n</body>");
+            const targetJs = `${relativePrefix}assets/js/script.js`;
+            const targetCss = `${relativePrefix}assets/css/style.css`;
+            const targetFaviconPng = `${relativePrefix}favicon.png`;
+            const targetFaviconIco = `${relativePrefix}favicon.ico`;
+
+            html = html.replace(/\s*<script\s+type="module"\s+crossorigin\s+src="[^"]*assets\/js\/(script|common)\.js"><\/script>\s*/gi, "\n");
+            html = html.replace(/\s*<script\s+type="module"\s+src="[^"]*assets\/js\/(script|common)\.js"><\/script>\s*/gi, "\n");
+            html = html.replace(/\s*<script\s+crossorigin\s+src="[^"]*assets\/js\/(script|common)\.js"><\/script>\s*/gi, "\n");
+            html = html.replace(/\s*<link\s+[^>]*href="[^"]*assets\/common\.css"[^>]*>\s*/gi, "\n");
+
+            html = html.replace(/src="\.\/assets\/js\/\.js"/g, `src="${targetJs}"`);
+            html = html.replace(/href="\.\/assets\/\.css\."/g, `href="${targetCss}"`);
+
+            // ĐOẠN ĐÃ SỬA: Quét sạch mọi định dạng cũ (./favicon.webp, /favicon.png) để đưa về đúng link theo cấp bậc
+            html = html.replace(/href="[^"]*favicon\.(png|webp|ico)"/gi, (match) => {
+              if (match.toLowerCase().includes(".ico")) {
+                return `href="${targetFaviconIco}"`;
+              }
+              return `href="${targetFaviconPng}"`;
+            });
+
+            if (!html.includes(`src="${targetJs}"`)) {
+              html = html.replace("</body>", `<script src="${targetJs}" defer></script>\n</body>`);
             }
 
-            html = html.replace(
-              "<link rel=\"stylesheet\" crossorigin href=\"./assets/css/style.css\">",
-              "<link rel=\"stylesheet\" href=\"./assets/css/style.css\">"
-            );
+            if (!html.includes(`href="${targetCss}"`)) {
+              html = html.replace("</head>", `<link rel="stylesheet" href="${targetCss}">\n</head>`);
+            }
+
+            html = beautify.html(html, {
+              indent_size: 4,
+              indent_char: " ",
+              max_preserve_newlines: 1,
+              preserve_newlines: false,
+              keep_array_indentation: false,
+              end_with_newline: true,
+              indent_inner_html: true,
+              extra_liners: [],
+              indent_scripts: "normal"
+            });
           }
-
-          // Các chỉnh sửa đường dẫn component dùng chung (áp dụng cho cả hai môi trường)
-          html = html.replace(
-            "<link rel=\"stylesheet\" href=\"./common/footer/style.css\">",
-            "<link rel=\"stylesheet\" href=\"/common/footer/style.css\">"
-          );
-
-          html = html.replace(
-            "<script type=\"module\" src=\"./common/footer/script.js\"></script>",
-            "<script type=\"module\" src=\"/common/footer/script.js\">"
-          );
 
           return html;
         }
@@ -104,10 +120,8 @@ export default ({ command }) => {
       emptyOutDir: true,
       modulePreload: false,
       chunkSizeWarningLimit: 3000,
-      // Rollup Options chỉ hoạt động khi chạy lệnh `vite build`
       rollupOptions: {
         input: {
-          // Giữ nguyên cấu hình entry point của bạn cho đầu ra production
           script: "src/assets/js/common.js",
           style: "src/assets/css/style.scss",
         },
@@ -119,6 +133,10 @@ export default ({ command }) => {
           assetFileNames: (assetsInfo) => {
             const fontRegex = /\.(woff2?|ttf|otf|eot)$/i;
             const imageRegex = /\.(png|jpe?g|gif|webp|svg)$/i;
+
+            if (assetsInfo.names.some(name => name.toLowerCase().includes("favicon"))) {
+              return "[name].[ext]";
+            }
 
             if (
               assetsInfo.names.includes("style.css") ||

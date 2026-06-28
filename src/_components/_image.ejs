@@ -5,21 +5,22 @@
  */
 // TODO: 画像関連は多彩なのであとから拡張する
 let data = {
-  src: 'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20image',
-  alt:'imageコンポーネント',
-  caption:'imageコンポーネント',
-  width: '150',
-  height: '150',
-  type: 'image', // picture, figure, image
+  src: '',
+  alt:'',
+  caption:'',
+  width: '',
+  height: '',
+  type: '', // picture, figure, image, caption
+  class: '',
   list: [
     {
-      media: '(max-width: 590px)',
-      srcset: 'http://placehold.jp/d0d0d2/ffffff/200x100.png?text=sp',
+      media: '',
+      srcset: '',
       type: 'image/jpg',
     },
     {
-      media: '(min-width: 600px)',
-      srcset: 'http://placehold.jp/d0d0d2/ffffff/400x200.png?text=pc',
+      media: '',
+      srcset: '',
       type: 'image/jpg',
     }
   ]
@@ -30,28 +31,29 @@ data.caption = typeof props !== 'undefined' && typeof props.caption !== 'undefin
 data.width = typeof props !== 'undefined' && typeof props.width !== 'undefined' ? props.width : data.width
 data.height = typeof props !== 'undefined' && typeof props.height !== 'undefined' ? props.height : data.height
 data.type = typeof props !== 'undefined' && typeof props.type !== 'undefined' ? props.type : data.type
+data.class = typeof props !== 'undefined' && typeof props.class !== 'undefined' ? props.class : data.class
 data.list = typeof props !== 'undefined' && typeof props.list !== 'undefined' ? props.list : data.list
 _%>
   <%_ if(data.type === 'caption') { _%>
-  <figure class="c-image__figure">
-    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
+  <figure class="c-image__figure <%= data.class %>">
+    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image" />
     <figcaption class="c-image__caption"><%= data.caption %></figcaption>
   </figure>
   <%_ } else if(data.type === 'picture') { _%>
-  <picture class="c-image__picture">
+  <picture class="c-image__picture <%= data.class %>">
     <% data.list.forEach((item) => { %>
       <source srcset="<%= item.srcset %>" <%- item.media ? `media="${item.media}"` : '' %> <%- item.type ? `type="${item.type}"` : '' %> />
     <% }) %>
-    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
+    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image" />
   </picture>
   <%_ } else if(data.type === 'figure') { _%>
-  <picture class="c-image__picture">
+  <picture class="c-image__picture <%= data.class %>">
     <% data.list.forEach((item) => { %>
       <source srcset="<%= item.srcset %>" <%- item.media ? `media="${item.media}"` : '' %> <%- item.type ? `type="${item.type}"` : '' %> />
     <% }) %>
-    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
+    <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image" />
   </picture>
   <%_ } else { _%>
-  <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image__img" />
+  <img src="<%= data.src %>" alt="<%= data.alt %>" width="<%= data.width %>" height="<%= data.height %>" class="c-image <%= data.class %>" />
   <%_ } _%>
 
