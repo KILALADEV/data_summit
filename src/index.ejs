@@ -457,6 +457,21 @@ twitterImage: assets/images/OGP.jpg
     <p>Bắt buộc phải kiểm tra các điều sau đây trước khi gửi đến khách hàng:</p>
 
     <dl class="c-spec-list">
+
+        
+
+        <dt class="c-spec-list__term" id="term-fonts">Dung lượng và định dạng Font chữ</dt>
+        <dd class="c-spec-list__desc" aria-labelledby="term-fonts">Chỉ sử dụng định dạng WOFF2 (đã nén tối ưu). Phải áp dụng thuộc tính font-display: swap để tránh lỗi ẩn văn bản khi đang tải (FOIT).</dd>
+
+        <dt class="c-spec-list__term" id="term-metadata">Thẻ Meta tiêu đề và mô tả (Meta Tags)</dt>
+        <dd class="c-spec-list__desc" aria-labelledby="term-metadata">Mỗi URL phải có duy nhất một thẻ &lt;title&gt; (dưới 60 ký tự) và &lt;meta name="description"&gt; (từ 120 - 160 ký tự). Nội dung phải chứa từ khóa chính và tuyệt đối không được trùng lặp giữa các trang.</dd>
+
+        <dt class="c-spec-list__term" id="term-semantic">Sử dụng thẻ ngữ nghĩa (Semantic HTML5)</dt>
+        <dd class="c-spec-list__desc" aria-labelledby="term-semantic">Bắt buộc phân tách bố cục trang bằng các thẻ HTML5 chuẩn ngữ nghĩa thay vì lạm dụng thẻ div vô nghĩa: &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;section&gt;, &lt;footer&gt;. Giúp Googlebot hiểu rõ vai trò của từng vùng nội dung.</dd>
+
+        <dt class="c-spec-list__term" id="term-lang">Khai báo ngôn ngữ (Lang Attribute)</dt>
+        <dd class="c-spec-list__desc" aria-labelledby="term-lang">Thẻ &lt;html&gt; bắt buộc phải có thuộc tính lang (ví dụ: lang="vi") để trình duyệt và công cụ tìm kiếm xác định chính xác ngôn ngữ mặc định, tránh lỗi dịch tự động sai lệch.</dd>
+
         <!-- Nhóm 1: Dung lượng & Hiệu năng -->
         <dt class="c-spec-list__term" id="term-html">Dung lượng file HTML tối đa</dt>
         <dd class="c-spec-list__desc" aria-labelledby="term-html">Giới hạn dưới 100 KB. Tách toàn bộ CSS/JS ra file độc lập, cấm viết mã inline.</dd>
