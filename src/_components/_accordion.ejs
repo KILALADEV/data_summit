@@ -1,31 +1,37 @@
 <%_
 /**
  * accordion
- * @description: Component đóng mở nội dung (Accordion)
+ * @description: Component Accordion
  */
 let data = {
+  id: 'accordion-' + Math.random().toString(36).substring(2, 9),
   items: []  // Mảng chứa các object dạng { title: '...', content: '...' }
 }
 
-// Gán giá trị từ props nếu có
 if (typeof props !== 'undefined') {
   data.items = typeof props.items !== 'undefined' ? props.items : data.items;
 }
 _%>
 
 <% if (data.items && data.items.length > 0) { %>
-  <div class="c-accordion">
-    <% data.items.forEach(function(item, index) { %>
-      <div class="c-accordion__item">
-        <button class="c-accordion__button" type="button" aria-expanded="false">
-          <%= item.title %>
+  <dl class="c-accordion" data-accordion-group>
+    <% data.items.forEach(function(item, index) { let buttonId=`accordion-btn-${data.id}-${index}`; let
+      panelId=`accordion-panel-${data.id}-${index}`; %>
+
+      <dt class="c-accordion__heading">
+        <button id="<%= buttonId %>" class="c-accordion__button" type="button" aria-expanded="false"
+          aria-controls="<%= panelId %>">
+          <span class="c-accordion__title">
+            <%= item.title %>
+          </span>
         </button>
-        <div class="c-accordion__panel" style="display: none;">
-          <div class="c-accordion__content">
-            <%= item.content %>
-          </div>
+      </dt>
+
+      <dd id="<%= panelId %>" class="c-accordion__panel" aria-labelledby="<%= buttonId %>" hidden>
+        <div class="c-accordion__content">
+          <%= item.content %>
         </div>
-      </div>
-    <% }); %>
-  </div>
+      </dd>
+      <% }); %>
+  </dl>
 <% } %>

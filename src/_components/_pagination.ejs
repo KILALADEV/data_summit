@@ -1,7 +1,7 @@
 <%_
 /**
  * pagination
- * @description: Component chuyển trang
+ * @description: Component pagination
  */
 let data = {
   currentPage: 1,
@@ -16,29 +16,47 @@ if (typeof props !== 'undefined') {
 _%>
 
 <% if (data.totalPages > 1) { %>
-  <nav class="c-pagination" aria-label="Pagination">
-    <a href="<%= data.baseUrl %><%= data.currentPage - 1 %>" 
-       class="c-pagination__btn c-pagination__btn--prev <%= data.currentPage === 1 ? 'is-disabled' : '' %>"
-       <%= data.currentPage === 1 ? 'tabindex="-1" aria-disabled="true"' : '' %>>
-       Trước
-    </a>
-
+  <nav class="c-pagination" aria-label="ページネーション">
+    <% if (data.currentPage === 1) { %>
+      <span class="c-pagination__btn c-pagination__btn--prev is-disabled" aria-disabled="true">
+        前へ
+      </span>
+    <% } else { %>
+      <a href="<%= data.baseUrl %><%= data.currentPage - 1 %>"
+         class="c-pagination__btn c-pagination__btn--prev"
+         aria-label="前のページへ">
+        前へ
+      </a>
+    <% } %>
     <ul class="c-pagination__list">
       <% for(let i = 1; i <= data.totalPages; i++) { %>
         <li class="c-pagination__item">
-          <a href="<%= data.baseUrl %><%= i %>" 
-             class="c-pagination__link <%= i === data.currentPage ? 'is-active' : '' %>"
-             <%= i === data.currentPage ? 'aria-current="page"' : '' %>>
-            <%= i %>
-          </a>
+          <% if (i === data.currentPage) { %>
+            <span class="c-pagination__link is-active" aria-current="page">
+              <%= i %>
+            </span>
+          <% } else { %>
+            <a href="<%= data.baseUrl %><%= i %>"
+               class="c-pagination__link"
+               aria-label="<%= i %>ページ目へ">
+              <%= i %>
+            </a>
+          <% } %>
         </li>
       <% } %>
     </ul>
 
-    <a href="<%= data.baseUrl %><%= data.currentPage + 1 %>" 
-       class="c-pagination__btn c-pagination__btn--next <%= data.currentPage === data.totalPages ? 'is-disabled' : '' %>"
-       <%= data.currentPage === data.totalPages ? 'tabindex="-1" aria-disabled="true"' : '' %>>
-       Sau
-    </a>
+    <% if (data.currentPage === data.totalPages) { %>
+      <span class="c-pagination__btn c-pagination__btn--next is-disabled" aria-disabled="true">
+        次へ
+      </span>
+    <% } else { %>
+      <a href="<%= data.baseUrl %><%= data.currentPage + 1 %>"
+         class="c-pagination__btn c-pagination__btn--next"
+         aria-label="次のページへ">
+        次へ
+      </a>
+    <% } %>
+
   </nav>
 <% } %>

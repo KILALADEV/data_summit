@@ -1,22 +1,24 @@
 <%_
 /**
  * input-text
- * @description: Component ô nhập liệu văn bản ngắn
+ * @description: Component Input
  */
 let data = {
-  id: 'input-' + Math.random().toString(36).substr(2, 9),
-  type: 'text',       // text, email, password, tel, number
-  label: '',          // Tiêu đề ô nhập liệu
-  placeholder: '',    // Chữ gợi ý hiển thị mờ
-  value: '',          // Giá trị mặc định
-  required: false,    // Có bắt buộc không
-  disabled: false,    // Có vô hiệu hóa không
-  errorMessage: ''    // Tin nhắn lỗi nếu Validation thất bại
+  id: 'input-' + Math.random().toString(36).substring(2, 9),
+  type: 'text',       // text, email, password, tel, number, url
+  name: '',           // Tên trường (Bắt buộc phải có cho SEO/Submit Form native)
+  label: '',
+  placeholder: '',
+  value: '',
+  required: false,
+  disabled: false,
+  errorMessage: ''
 }
 
 if (typeof props !== 'undefined') {
   data.id = typeof props.id !== 'undefined' ? props.id : data.id;
   data.type = typeof props.type !== 'undefined' ? props.type : data.type;
+  data.name = typeof props.name !== 'undefined' ? props.name : data.name || data.id; // Nếu không truyền name, lấy tạm id làm name
   data.label = typeof props.label !== 'undefined' ? props.label : data.label;
   data.placeholder = typeof props.placeholder !== 'undefined' ? props.placeholder : data.placeholder;
   data.value = typeof props.value !== 'undefined' ? props.value : data.value;
@@ -24,29 +26,43 @@ if (typeof props !== 'undefined') {
   data.disabled = typeof props.disabled !== 'undefined' ? props.disabled : data.disabled;
   data.errorMessage = typeof props.errorMessage !== 'undefined' ? props.errorMessage : data.errorMessage;
 }
+
+// Tạo ID riêng cho thẻ thông báo lỗi để liên kết bằng aria-describedby
+let errorId = `err-${data.id}`;
 _%>
 
 <div class="c-field <%= data.errorMessage ? 'has-error' : '' %> <%= data.disabled ? 'is-disabled' : '' %>">
   <% if (data.label) { %>
     <label for="<%= data.id %>" class="c-field__label">
       <%= data.label %>
-      <% if (data.required) { %><span class="c-field__required">*</span><% } %>
+      <% if (data.required) { %>
+        <span class="c-field__required" aria-hidden="true">*</span>
+      <% } %>
     </label>
   <% } %>
-  
+
   <div class="c-field__control">
-    <input 
-      type="<%= data.type %>" 
+    <input
+      type="<%= data.type %>"
       id="<%= data.id %>"
+      name="<%= data.name %>"
       class="c-field__input"
       placeholder="<%= data.placeholder %>"
       value="<%= data.value %>"
-      <%= data.required ? 'required' : '' %>
-      <%= data.disabled ? 'disabled' : '' %>
+      <% if (data.required) { %> required aria-required="true" <% } %>
+      <% if (data.disabled) { %> disabled <% } %>
+
+      <% if (data.errorMessage) { %>
+        aria-invalid="true"
+        aria-describedby="<%= errorId %>"
+      <% } %>
     >
   </div>
 
   <% if (data.errorMessage) { %>
-    <p class="c-field__error-message"><%= data.errorMessage %></p>
+    <p id="<%= errorId %>" class="c-field__error-message" role="alert">
+      <%= data.errorMessage %>
+    </p>
   <% } %>
+
 </div>

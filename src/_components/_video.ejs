@@ -1,34 +1,67 @@
 <%_
 /**
  * video
- * @description: videoコンポーネント
+ * @description: Videoコンポーネント
  */
-// TODO: 画像関連は多彩なのであとから拡張する
 let data = {
+  // Mảng chứa các object định dạng đầy đủ để tối ưu luồng tải của trình duyệt
   src: [
-    'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20video',
-    'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20video',
-    'http://placehold.jp/d0d0d2/ffffff/150x150.png?text=no%20video',
+    { src: 'video.mp4', type: 'video/mp4' },
+    { src: 'video.webm', type: 'video/webm' }
   ],
-  text:'動画を再生するには、videoタグをサポートしたブラウザが必要です。',
+  text: '動画を再生するには、videoタグをサポートしたブラウザが必要です。',
   width: '400',
   height: '300',
   poster: 'http://placehold.jp/d0d0d2/ffffff/720x405.png?text=video%20poster',
   aspect: '16-9',
+  controls: true,    // Hiện thanh điều khiển (Play/Pause/Volume) - Rất quan trọng cho A11y
+  autoplay: false,   // Mặc định tắt tự động phát.
+  muted: false,      // Tắt tiếng mặc định
+  loop: false,       // Lặp lại video
+  preload: 'metadata' // 'none', 'metadata' (tải trước thông tin độ dài), 'auto' (tải trước toàn bộ)
 }
-data.src = typeof props !== 'undefined' && typeof props.src !== 'undefined' ? props.src : data.src
-data.text = typeof props !== 'undefined' && typeof props.text !== 'undefined' ? props.text : data.text
-data.width = typeof props !== 'undefined' && typeof props.width !== 'undefined' ? props.width : data.width
-data.height = typeof props !== 'undefined' && typeof props.height !== 'undefined' ? props.height : data.height
-data.poster = typeof props !== 'undefined' && typeof props.poster !== 'undefined' ? props.poster : data.poster
-data.aspect = typeof props !== 'undefined' && typeof props.aspect !== 'undefined' ? props.aspect : data.aspect
+
+if (typeof props !== 'undefined') {
+  data.src = typeof props.src !== 'undefined' ? props.src : data.src;
+  data.text = typeof props.text !== 'undefined' ? props.text : data.text;
+  data.width = typeof props.width !== 'undefined' ? props.width : data.width;
+  data.height = typeof props.height !== 'undefined' ? props.height : data.height;
+  data.poster = typeof props.poster !== 'undefined' ? props.poster : data.poster;
+  data.aspect = typeof props.aspect !== 'undefined' ? props.aspect : data.aspect;
+  data.controls = typeof props.controls !== 'undefined' ? props.controls : data.controls;
+  data.autoplay = typeof props.autoplay !== 'undefined' ? props.autoplay : data.autoplay;
+  data.muted = typeof props.muted !== 'undefined' ? props.muted : data.muted;
+  data.loop = typeof props.loop !== 'undefined' ? props.loop : data.loop;
+  data.preload = typeof props.preload !== 'undefined' ? props.preload : data.preload;
+}
+
+// Nếu dev bật autoplay, BẮT BUỘC phải ép thêm thuộc tính muted để không bị trình duyệt chặn cơ chế phát
+if (data.autoplay) {
+  data.muted = true;
+}
 _%>
 
 <div class="c-video <%- data.aspect ? `c-video--${data.aspect}` : '' %>">
-  <video controls autoplay poster="<%= data.poster %>" width="<%= data.width %>" height="<%= data.height %>" class="c-video__view">
+  <video
+    class="c-video__view"
+    poster="<%= data.poster %>"
+    width="<%= data.width %>"
+    height="<%= data.height %>"
+    preload="<%= data.preload %>"
+    playsinline
+    <%= data.controls ? 'controls' : '' %>
+    <%= data.autoplay ? 'autoplay' : '' %>
+    <%= data.muted ? 'muted' : '' %>
+    <%= data.loop ? 'loop' : '' %>
+  >
     <% data.src.forEach((item) => { %>
-      <source src="<%= item %>">
+      <% if (typeof item === 'object') { %>
+        <source src="<%= item.src %>" type="<%= item.type %>">
+      <% } else { %>
+        <source src="<%= item %>">
+      <% } %>
     <% }) %>
-    <p><%= data.text %></p>
+
+    <p class="c-video__fallback"><%= data.text %></p>
   </video>
 </div>

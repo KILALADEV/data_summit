@@ -1,21 +1,44 @@
 <%_
 /**
  * checkbox
- * @description: checkboxコンポーネント
+ * @description: Component Checkbox
  */
 let data = {
-  label:'チェックボックス',
-  name: 'checkbox',
-  id: 'checkbox',
-  size: '',
+  id: 'chk-' + Math.random().toString(36).substring(2, 9), // Tự động tạo ID nếu dev quên truyền
+  name: '',
+  label: '',
+  size: '',         // ví dụ: 'sm', 'lg'
+  checked: false,   // Trạng thái tích chọn mặc định
+  disabled: false,  // Trạng thái vô hiệu hóa
+  required: false   // Trạng thái bắt buộc điền
 }
-data.label = typeof props !== 'undefined' && typeof props.label !== 'undefined' ? props.label : data.label
-data.name = typeof props !== 'undefined' && typeof props.name !== 'undefined' ? props.name : data.name
-data.id = typeof props !== 'undefined' && typeof props.id !== 'undefined' ? props.id : data.id
-data.size = typeof props !== 'undefined' && typeof props.size !== 'undefined' ? props.size : data.size
-_%>
-<label class="c-checkbox">
-  <input type="checkbox" name="<%= data.name %>" id="<%= data.id %>" class="c-checkbox__input <%- data.size ? `c-checkbox__input--${data.size}` : '' %>">
-  <span class="c-checkbox__label"><%= data.label %></span>
-</label>
 
+if (typeof props !== 'undefined') {
+  data.id = typeof props.id !== 'undefined' ? props.id : data.id;
+  data.name = typeof props.name !== 'undefined' ? props.name : data.name;
+  data.label = typeof props.label !== 'undefined' ? props.label : data.label;
+  data.size = typeof props.size !== 'undefined' ? props.size : data.size;
+  data.checked = typeof props.checked !== 'undefined' ? props.checked : data.checked;
+  data.disabled = typeof props.disabled !== 'undefined' ? props.disabled : data.disabled;
+  data.required = typeof props.required !== 'undefined' ? props.required : data.required;
+}
+_%>
+
+<label class="c-checkbox <%= data.disabled ? 'is-disabled' : '' %>" for="<%= data.id %>">
+  <input
+    type="checkbox"
+    name="<%= data.name %>"
+    id="<%= data.id %>"
+    class="c-checkbox__input <%- data.size ? `c-checkbox__input--${data.size}` : '' %>"
+    <% if (data.checked) { %> checked <% } %>
+    <% if (data.disabled) { %> disabled <% } %>
+    <% if (data.required) { %> aria-required="true" required <% } %>
+  >
+
+  <span class="c-checkbox__label">
+    <%= data.label %>
+    <% if (data.required) { %>
+      <span class="c-checkbox__required" aria-hidden="true">*</span>
+    <% } %>
+  </span>
+</label>

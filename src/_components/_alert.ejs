@@ -18,9 +18,9 @@ _%>
 
 <% if (data.message) { %>
   <div class="c-alert c-alert--<%= data.type %>" role="alert">
-    <div class="c-alert__content">
+    <p class="c-alert__content">
       <%= data.message %>
-    </div>
+    </p>
     <% if (data.closable) { %>
       <button type="button" class="c-alert__close" aria-label="Close" onclick="this.parentElement.style.display='none';">
         &times;
