@@ -10,4 +10,711 @@ twitterUrl:
 twitterCard: summary_large_image
 twitterImage: assets/images/OGP.jpg
 ---
+<%
+  const schedule = [
+    {
+      timeBlock: "10:00",
+      cards: [
+        {
+          time: "10:00-11:15",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+    {
+      timeBlock: "11:00",
+      cards: [
+        {
+          time: "11:25-11:40",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "11:50-12:10",
+          label: "A-2",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "11:25-11:40",
+          label: "B-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "11:10-11:30",
+          label: "C-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "11:00-11:40",
+          label: "D-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "11:50-12:05",
+          label: "E-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+     {
+      timeBlock: "12:00",
+      cards: [
+        {
+          time: "12:25-13:40",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "12:30-13:10",
+          label: "A-2",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "12:50-13:05",
+          label: "B-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "12:50-13:05",
+          label: "C-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "12:50-13:05",
+          label: "D-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+    {
+      timeBlock: "13:00",
+      cards: [
+        {
+          time: "13:25-14:40",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "13:30-14:10",
+          label: "A-2",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "13:50-14:05",
+          label: "B-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "13:50-14:05",
+          label: "C-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "13:50-14:05",
+          label: "D-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+    {
+      timeBlock: "14:00",
+      cards: [
+        {
+          time: "14:25-15:40",
+          label: "A-1",
+          category: "Platinum Sponsor Session",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "14:30-15:10",
+          label: "A-2",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "14:50-15:05",
+          label: "B-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+    {
+      timeBlock: "15:00",
+      cards: [
+        {
+          time: "15:25-16:40",
+          label: "A-1",
+          category: "Platinum Sponsor Session",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "15:30-16:10",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "15:50-16:05",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "15:50-16:05",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+    {
+      timeBlock: "16:00",
+      cards: [
+        {
+          time: "16:25-17:40",
+          label: "A-1",
+          category: "Platinum Sponsor Session",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "16:30-17:10",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "16:50-17:05",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "16:50-17:05",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+         {
+          time: "16:50-17:05",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+         {
+          time: "16:50-17:05",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+    {
+      timeBlock: "17:00",
+      cards: [
+        {
+          time: "17:25-18:40",
+          label: "A-1",
+          category: "Platinum Sponsor Session",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+        {
+          time: "17:30-18:10",
+          label: "A-1",
+          category: "Category",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        },
+      ]
+    },
+     {
+      timeBlock: "18:00",
+      cards: [
+        {
+          time: "18:40-20:00",
+          label: "A-1",
+          category: "Platinum Sponsor Session",
+          title: 'タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル<br>タイトルタイトルタイトルタイトル',
+          speakers: [
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+            { name: "〇〇 〇〇 氏", company: "〇〇〇〇株式会社", role: "部署名部署名 役職 or 職種名" },
+          ],
+          gallery: ["/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg", "/assets/images/img_speaker_01.jpg"],
+          companies: [
+            { src: "/assets/images/img_aws.jpg", alt: "aws" },
+            { src: "/assets/images/img_intage.jpg", alt: "intage" },
+            { src: "/assets/images/img_google.jpg", alt: "google cloud" },
+            { src: "/assets/images/img_ace.jpg", alt: "cloud ace" }
+          ]
+        }
+      ]
+    },
+  ];
+%>
 
+<section id="timetable" class="top-timetable">
+  <div class="container">
+     <h2 class="c-title">TimeTable</h2>
+
+  <% schedule.forEach(block => { %>
+    <p class="c-divider-block">
+      <span class="c-divider-title"><%= block.timeBlock %></span>
+      <span class="c-divider"></span>
+    </p>
+
+    <div class="top-col">
+      <% block.cards.forEach(card => { %>
+        <div class="top-col__item">
+          <div class="c-card">
+          <p class="c-card__time">
+            <%= card.time %>
+            <span class="c-card__lable"><%= card.label %></span>
+          </p>
+          <p class="c-card__category"><%= card.category %></p>
+          <h3 class="c-card__title">
+            <a href="#" class="c-card__link"><%- card.title %></a>
+          </h3>
+
+          <div class="c-card__detail">
+            <% card.speakers.forEach(speaker => { %>
+              <p class="c-card__subtitle"><%= speaker.name %></p>
+              <p class="c-card__lead"><%= speaker.company %></p>
+              <p class="c-card__text"><%= speaker.role %></p>
+            <% }); %>
+
+            <div class="c-card__gallery">
+              <% card.gallery.forEach(imgSrc => { %>
+                <img class="c-image" src="<%= imgSrc %>" alt="" width="176" height="212">
+              <% }); %>
+            </div>
+
+            <ul class="c-card__company">
+              <% card.companies.forEach(item => { %>
+                <li><img class="c-image" src="<%= item.src %>" alt="<%= item.alt %>" width="152" height="152"></li>
+              <% }); %>
+            </ul>
+          </div>
+
+          <a href="#" class="c-card__modal">
+            <img src="/assets/images/icon-plus.png" alt="open modal" width="80" height="80">
+          </a>
+        </div>
+        </div>
+      <% }); %>
+    </div>
+  <% }); %>
+  </div>
+</section>
+
+<%
+  const faqs = [
+    {
+      q: "オンライン配信はありますか？",
+      a: "いいえ、オフライン限定開催です。10月15日に寺田倉庫にご来場いただいた方のみ、ご参加いただけます。"
+    },
+    {
+      q: "参加費はかかりますか？",
+      a: "無料でご参加いただけます。"
+    },
+    {
+      q: "当日の持ち物はありますか？",
+      a: "受付用のQRコードとお名刺を2枚ご用意ください。"
+    }
+  ];
+%>
+
+<section id="faq" class="top-faq">
+  <div class="container">
+    <h2 class="c-title">FAQ</h2>
+
+    <dl class="c-accordion" data-accordion-group>
+      <% faqs.forEach((faq, index) => {
+        const buttonId = `faq-btn-${index + 1}`;
+        const panelId = `faq-panel-${index + 1}`;
+      %>
+        <dt class="c-accordion__heading">
+          <button id="<%= buttonId %>" class="c-accordion__button" type="button" aria-expanded="false" aria-controls="<%= panelId %>">
+            <span class="c-accordion__title">
+              <%- faq.q %>
+            </span>
+          </button>
+        </dt>
+
+        <dd id="<%= panelId %>" class="c-accordion__panel" aria-labelledby="<%= buttonId %>" hidden>
+          <div class="c-accordion__content">
+            <%- faq.a %>
+          </div>
+        </dd>
+      <% }); %>
+    </dl>
+  </div>
+</section>

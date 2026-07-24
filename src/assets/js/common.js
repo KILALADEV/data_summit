@@ -17,9 +17,40 @@ const GlobalFunc = {
     GlobalFunc.initAnchorLinks();
     GlobalFunc.initModals();
     GlobalFunc.initLenisSystem();
+    GlobalFunc.initAccording();
 
     // Add 'loaded' class to body after a short delay once the page fully loads
     window.addEventListener("load", () => setTimeout(() => document.body.classList.add("loaded"), 500));
+  },
+
+  initAccording: () => {
+    const accordionGroups = document.querySelectorAll("[data-accordion-group]");
+
+    accordionGroups.forEach((group) => {
+      const buttons = group.querySelectorAll(".c-accordion__button");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const expanded = button.getAttribute("aria-expanded") === "true";
+          const panelId = button.getAttribute("aria-controls");
+          const panel = document.getElementById(panelId);
+
+          if (!panel) return;
+
+          buttons.forEach((otherBtn) => {
+            if (otherBtn !== button) {
+              otherBtn.setAttribute("aria-expanded", "false");
+              const otherPanelId = otherBtn.getAttribute("aria-controls");
+              const otherPanel = document.getElementById(otherPanelId);
+              if (otherPanel) otherPanel.hidden = true;
+            }
+          });
+
+          button.setAttribute("aria-expanded", !expanded);
+          panel.hidden = expanded;
+        });
+      });
+    });
   },
 
   initScrollEffects: () => {

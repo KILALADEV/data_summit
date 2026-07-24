@@ -1,1 +1,156 @@
 @use "../global" as *;
+
+.c-card {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding: px2rem(50) px2rem(20) px2rem(55);
+  background: var(--color-white);
+
+  @include mq {
+    padding: px2rem(64) px2rem(30) px2rem(20);
+  }
+}
+
+.c-card__time {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: px2rem(8);
+  font-size: px2rem(16);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-white);
+  text-align: center;
+  background: var(--color-main);
+
+  @include mq {
+    padding: px2rem(12) px2rem(8);
+    font-size: px2rem(18);
+  }
+}
+
+.c-card__lable {
+  position: absolute;
+  top: 50%;
+  left: px2rem(8);
+  min-width: px2rem(60);
+  max-width: px2rem(60);
+  padding: px2rem(4) px2rem(12) px2rem(6);
+  font-size: px2rem(13);
+  line-height: 1;
+  color: var(--color-main);
+  background: var(--color-white);
+  transform: translateY(-50%);
+
+  @include mq {
+    font-size: px2rem(16);
+  }
+}
+
+.c-card__category {
+  display: inline-block;
+  padding: px2rem(3) px2rem(4) px2rem(5);
+  font-size: px2rem(10);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-white);
+  background: var(--color-main);
+
+  @include mq {
+    padding: px2rem(5) px2rem(8) px2rem(7);
+    font-size: px2rem(12);
+  }
+}
+
+.c-card__title {
+  width: 100%;
+  margin-top: px2rem(8);
+  font-size: px2rem(14);
+  font-weight: 700;
+  line-height: 1.6;
+
+  @include mq {
+    font-size: px2rem(20);
+  }
+
+
+}
+
+.c-card__link {
+  color: var(--color-black);
+  transition: .3s ease-in-out;
+
+  @include hover {
+    color: var(--color-main);
+  }
+}
+
+.c-card__detail {
+  width: 100%;
+  margin-top: px2rem(8);
+
+  @include mq {
+    margin-top: px2rem(12);
+  }
+}
+
+.c-card__subtitle {
+  margin-top: px2rem(8);
+  font-size: px2rem(20);
+  font-weight: 700;
+
+  @include mq {
+    margin-top: px2rem(12);
+  }
+}
+
+.c-card__lead {
+  margin-top: px2rem(4);
+  font-size: px2rem(12);
+  font-weight: 700;
+
+  @include mq {
+    font-size: px2rem(14);
+  }
+}
+
+.c-card__text {
+  font-size: px2rem(12);
+  font-weight: 400;
+
+  @include mq {
+    font-size: px2rem(14);
+  }
+}
+
+.c-card__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(px2rem(88), 1fr));
+  gap: px2rem(8);
+  margin-top: px2rem(16);
+}
+
+.c-card__company {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: px2rem(10);
+
+  @include mq {
+    margin-top: px2rem(20);
+  }
+
+  li {
+    width: calc(100% / 4);
+  }
+}
+
+.c-card__modal {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: px2rem(40);
+  height: px2rem(40);
+}

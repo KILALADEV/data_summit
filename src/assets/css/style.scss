@@ -6,3 +6,46 @@
 @use "./module";
 @use "./utility";
 @use "../../../node_modules/swiper/swiper-bundle.min.css";
+
+header {
+  display: none;
+}
+
+.container {
+  max-width: px2rem(1272);
+  padding: 0 px2rem(16);
+  margin: 0 auto;
+}
+
+.top-timetable {
+  padding: px2rem(72) 0;
+  background: var(--color-gray);
+
+  @include mq {
+    padding: px2rem(48) 0;
+  }
+}
+
+.top-col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: px2rem(10) px2rem(16);
+  margin-bottom: px2rem(48);
+}
+
+.top-col__item {
+  flex-basis: 100%;
+
+  @include mq {
+    flex-basis: calc(100% / 3 - px2rem(12));
+  }
+}
+
+.top-faq {
+  padding: px2rem(72) 0;
+  background: var(--color-gray);
+
+  @include mq {
+    padding: px2rem(48) 0;
+  }
+}
