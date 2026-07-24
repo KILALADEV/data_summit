@@ -1,0 +1,54 @@
+@use "../global" as *;
+
+.c-nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+
+    &__list {
+        display: flex;
+        gap: 29px;
+        align-items: center;
+
+        @include mq {
+            padding-bottom: 2px;
+        }
+    }
+
+    &__link {
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--color-main);
+    }
+
+    &__group {
+        display: flex;
+    }
+
+    &__btn {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 70px;
+        padding: 10px 10px 12px;
+        font-size: rem(14);
+        font-weight: 700;
+        color: var(--color-white);
+        background: var(--color-main);
+
+        &--yellow {
+            color: var(--color-main);
+            background: var(--color-yellow)
+        }
+
+        &::after {
+            width: 31px;
+            aspect-ratio: 31/7;
+            content: '';
+            background-color: currentcolor;
+            mask: url('../images/icon_arrow.svg') center/100% auto no-repeat;
+        }
+    }
+}

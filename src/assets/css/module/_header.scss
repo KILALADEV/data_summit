@@ -1,1 +1,17 @@
 @use "../global" as *;
+
+.m-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__logo {
+        padding-inline: 30px;
+        line-height: 1;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+    }
+}

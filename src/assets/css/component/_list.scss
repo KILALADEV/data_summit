@@ -1,0 +1,24 @@
+@use "../global" as *;
+
+.c-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__logo {
+        justify-content: center;
+
+        @include mq {
+            background: var(--color-white);
+        }
+
+        &--item {
+            @include mq {
+                width: 140px;
+            }
+        }
+
+        &--img {
+            width: 100%;
+        }
+    }
+}

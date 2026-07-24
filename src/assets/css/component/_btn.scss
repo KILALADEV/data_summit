@@ -1,1 +1,55 @@
 @use "../global" as *;
+
+.c-btn {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 444px;
+    padding: 9px 24px;
+    font-size: rem(18);
+    font-weight: 700;
+
+    @include hover {
+        .c-btn__arr {
+            flex-grow: 1;
+        }
+    }
+
+    &--mv {
+        min-height: 47px;
+    }
+
+    &--primary {
+        min-height: 77px;
+        color: var(--color-white);
+        background: var(--color-main);
+    }
+
+    &--yellow {
+        color: var(--color-main);
+        background: var(--color-yellow);
+    }
+
+    &__txt {
+        flex-shrink: 0;
+    }
+
+    &__arr {
+        position: relative;
+        width: 56px;
+        height: 11px;
+        border-bottom: 1px solid currentcolor;
+        transition: .3s ease;
+
+        &::after {
+            position: absolute;
+            right: -1px;
+            bottom: -1px;
+            width: 12px;
+            aspect-ratio: 1/1;
+            content: '';
+            background-color: currentcolor;
+            mask: url('../images/icon_triangle.svg') right center/100% auto no-repeat;
+        }
+    }
+}
