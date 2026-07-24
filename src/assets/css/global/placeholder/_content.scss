@@ -3,8 +3,12 @@
 
 %container {
   max-width: var(--content-width);
-  padding-inline: var(--content-gutter-narrow);
+  padding-inline: var(--content-gutter);
   margin-inline: auto;
+
+  @include mixin.mq {
+    padding-inline: var(--content-gutter-wide);
+  }
 }
 
 %content {
