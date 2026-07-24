@@ -23,17 +23,10 @@ const GlobalFunc = {
   },
 
   initScrollEffects: () => {
-    const header = document.querySelector(".l-header");
     const fadeItems = document.querySelectorAll(".fadein");
 
     const handleScroll = () => {
       const scroll = window.scrollY;
-
-      // Toggle header visibility based on scroll direction (hide on scroll down, show on scroll up)
-      if (header) {
-        header.classList.toggle("is-hidden", scroll > GlobalFunc.lastScrollY && scroll > 50);
-        GlobalFunc.lastScrollY = scroll;
-      }
 
       // Trigger fade-in elements when they enter the viewport
       fadeItems.forEach(item => {

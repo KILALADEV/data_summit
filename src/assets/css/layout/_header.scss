@@ -7,14 +7,7 @@
   left: 0;
   z-index: 10;
   width: 100%;
-  padding: px2rem(20);
-  font-size: px2rem(20);
-  color: var(--color-white);
-  background: var(--color-black);
-  transform: translateY(0);
+  color: var(--color-main);
+  background: var(--color-white);
   transition: .3s ease-in-out;
-
-  &.is-hidden {
-    transform: translateY(-100px);
-  }
 }

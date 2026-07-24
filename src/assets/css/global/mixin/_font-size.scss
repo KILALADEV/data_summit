@@ -16,7 +16,7 @@
   $min-vw: var.$viewport-min;
   $max-vw: $breakpoint;
 
-  @if $range == below {
+  @if $range ==below {
     $min-vw: $breakpoint + 1;
     $max-vw: var.$viewport-pc;
   }

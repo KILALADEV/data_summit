@@ -70,6 +70,7 @@ export default ({ command }) => {
 
             const targetJs = `${relativePrefix}assets/js/script.js`;
             const targetCss = `${relativePrefix}assets/css/style.css`;
+            const targetResetCss = `${relativePrefix}assets/css/reset.css`;
             const targetFaviconPng = `${relativePrefix}favicon.png`;
             const targetFaviconIco = `${relativePrefix}favicon.ico`;
 
@@ -95,6 +96,10 @@ export default ({ command }) => {
 
             if (!html.includes(`href="${targetCss}"`)) {
               html = html.replace("</head>", `<link rel="stylesheet" href="${targetCss}">\n</head>`);
+            }
+
+            if (!html.includes(`href="${targetResetCss}"`)) {
+              html = html.replace("</head>", `<link rel="stylesheet" href="${targetResetCss}">\n</head>`);
             }
 
             html = beautify.html(html, {
@@ -124,6 +129,7 @@ export default ({ command }) => {
         input: {
           script: "src/assets/js/common.js",
           style: "src/assets/css/style.scss",
+          reset: "src/assets/css/reset.scss",
         },
         external: [],
         treeshake: true,
@@ -140,6 +146,7 @@ export default ({ command }) => {
 
             if (
               assetsInfo.names.includes("style.css") ||
+              assetsInfo.names.includes("reset.css") ||
               assetsInfo.names.includes("strcss.css")
             ) {
               const name = assetsInfo.names[0].replace(".css", "");

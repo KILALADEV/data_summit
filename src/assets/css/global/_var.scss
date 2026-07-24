@@ -11,8 +11,8 @@ $breakpoint: (
   lg: 960px,
   xl: 1280px,
 );
-$reference-viewport-sp: 375;
-$reference-viewport-pc: 1366;
+$reference-viewport-sp: 360;
+$reference-viewport-pc: 1440;
 
 // ============================================================
 // Root Variables
@@ -20,8 +20,8 @@ $reference-viewport-pc: 1366;
 
 :root {
   // Font
-  --font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", sans-serif;
-  --font-family-en: "Barlow Condensed", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Meiryo", serif;
+  --font-family: "Noto Sans JP", sans-serif;
+  --font-family-en: "Inter", sans-serif;
 
   // Font size
   --font-size: 0.875rem;
@@ -33,6 +33,8 @@ $reference-viewport-pc: 1366;
   --letter-spacing: 0.05em;
 
   // Colors
+  --color-main: #0A7463;
+  --color-yellow: #F1F17F;
   --color-black: #000;
   --color-red: #E60014;
   --color-white: #fff;
@@ -40,16 +42,14 @@ $reference-viewport-pc: 1366;
   --color-green: #32C81E;
   --color-gray: #777;
   --color-light-gray: #dadada;
-  --color-pubple: #8000ff;
-  --color-pink: #ff09ad;
 
   // Content width
   --content-width: 1320px;
   --content-width-medium: 1100px;
 
   // Gutter
-  --content-gutter: 20px;
-  --content-gutter-wide: 60px;
+  --content-gutter: 16px;
+  --content-gutter-wide: 40px;
 
   // Module gutter
   --module-gutter: 1.875rem;
@@ -67,5 +67,4 @@ $reference-viewport-pc: 1366;
 
   // Z-index
   --z-index-header: 10;
-
 }
